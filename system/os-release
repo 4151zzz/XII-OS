@@ -1,0 +1,11 @@
+NAME="XII OS"
+PRETTY_NAME="XII OS 1.0 (Genesis)"
+ID=xii-os
+ID_LIKE="debian"
+VERSION="1.0"
+VERSION_ID="1.0"
+VERSION_CODENAME="genesis"
+HOME_URL="https://xii-os.org"
+SUPPORT_URL="https://xii-os.org/support"
+BUG_REPORT_URL="https://xii-os.org/bugs"
+LOGO=xii-boot-logo

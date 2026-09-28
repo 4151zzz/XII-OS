@@ -1,0 +1,190 @@
+// =============================================================
+// XII OS — Waybar Status Bar Configuration
+// desktop/shell/waybar/config.jsonc
+//
+// Waybar is the status bar for wlroots-based Wayland compositors.
+// This config implements XII OS's top status bar with:
+//   - Left:   XII logo + Workspace switcher
+//   - Center: Clock + Date
+//   - Right:  System tray (Network, BT, Volume, Battery, Power)
+//
+// Install: sudo apt install waybar
+// Config:  ~/.config/waybar/config.jsonc
+//       OR /etc/xii-os/desktop/waybar/config.jsonc
+// =============================================================
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+
+    // ─── LEFT SECTION ──────────────────────────────────────────
+    "modules-left": [
+      "custom/xii-logo",
+      "hyprland/workspaces",
+      "hyprland/window"
+    ],
+
+    // ─── CENTER SECTION ────────────────────────────────────────
+    "modules-center": [
+      "clock"
+    ],
+
+    // ─── RIGHT SECTION ─────────────────────────────────────────
+    "modules-right": [
+      "custom/xii-mode",
+      "pulseaudio",
+      "network",
+      "bluetooth",
+      "battery",
+      "tray",
+      "custom/power"
+    ],
+
+    // ─── MODULE CONFIGURATIONS ─────────────────────────────────
+
+    "custom/xii-logo": {
+      "format": "  XII OS",
+      "tooltip": false,
+      "on-click": "xii-launcher"
+    },
+
+    "hyprland/workspaces": {
+      "format": "{name}",
+      "format-icons": {
+        "1": "①", "2": "②", "3": "③", "4": "④", "5": "⑤",
+        "6": "⑥", "7": "⑦", "8": "⑧", "9": "⑨", "10": "⑩",
+        "active": "",
+        "default": ""
+      },
+      "on-scroll-up":   "hyprctl dispatch workspace e-1",
+      "on-scroll-down": "hyprctl dispatch workspace e+1",
+      "on-click":       "activate",
+      "all-outputs":    false,
+      "show-special":   false,
+      "persistent-workspaces": {
+        "1": [], "2": [], "3": [], "4": [], "5": []
+      }
+    },
+
+    "hyprland/window": {
+      "format": "{}",
+      "max-length": 40,
+      "separate-outputs": true,
+      "rewrite": {
+        "(.*) — Mozilla Firefox": "󰈹 $1",
+        "(.*) — Chromium":        "󰊯 $1",
+        "XII Files.*":            "󰉋 XII Files",
+        "XII Terminal.*":         " XII Terminal",
+        "XII Settings.*":         "⚙ XII Settings",
+        "XII Code.*":             " XII Code"
+      }
+    },
+
+    "clock": {
+      "format": " {:%H:%M}",
+      "format-alt": " {:%A, %B %d  %H:%M:%S}",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+        "mode": "year",
+        "mode-mon-col": 3,
+        "weeks-pos": "right",
+        "on-scroll": 1,
+        "format": {
+          "today": "<span color='#6ee7f7'><b>{}</b></span>"
+        }
+      },
+      "on-click": "xii-calendar",
+      "interval": 1
+    },
+
+    "custom/xii-mode": {
+      "exec": "xii-mode get",
+      "interval": 60,
+      "format": " {}",
+      "tooltip-format": "XII Performance Mode: {}\nClick to cycle",
+      "on-click": "xii-mode-cycle"
+    },
+
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "󰂰 {volume}%",
+      "format-bluetooth-muted": "󰂲",
+      "format-muted": "󰝟",
+      "format-icons": {
+        "headphone":      "󰋋",
+        "hands-free":     "󰋎",
+        "headset":        "󰋎",
+        "phone":          "",
+        "portable":       "",
+        "car":            "",
+        "default":        ["󰕿", "󰖀", "󰕾"]
+      },
+      "on-click":       "pavucontrol",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "scroll-step":    5,
+      "max-volume":     150,
+      "ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "network": {
+      "format-wifi":           "{icon} {signalStrength}%",
+      "format-ethernet":       "󰈀 {ipaddr}",
+      "format-linked":         "󰈀 (No IP)",
+      "format-disconnected":   "󰤮",
+      "format-alt":            " {essid} ({signalStrength}%)",
+      "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+      "tooltip-format":        "󰤨 {essid} — {ipaddr}/{cidr}\n{gwaddr} — {bandwidthUpBits} up / {bandwidthDownBits} down",
+      "tooltip-format-ethernet": "󰈀 {ifname}\n{ipaddr}/{cidr}",
+      "tooltip-format-disconnected": "Disconnected",
+      "on-click":              "xii-network",
+      "interval":              5
+    },
+
+    "bluetooth": {
+      "format":           "󰂯 {status}",
+      "format-disabled":  "󰂲",
+      "format-connected": "󰂱 {device_alias}",
+      "format-connected-battery": "󰂱 {device_alias} 󰁹{device_battery_percentage}%",
+      "tooltip-format":   "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+      "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "on-click":         "blueman-manager"
+    },
+
+    "battery": {
+      "interval": 30,
+      "states": {
+        "good":     95,
+        "warning":  30,
+        "critical": 15
+      },
+      "format":           "{icon} {capacity}%",
+      "format-charging":  "󰂄 {capacity}%",
+      "format-plugged":   "󰚥 {capacity}%",
+      "format-alt":       "{icon} {time}",
+      "format-icons":     ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+      "tooltip-format":   "{timeTo}\nCycles: {cycles}\nHealth: {health}%"
+    },
+
+    "tray": {
+      "icon-size":   16,
+      "spacing":     8,
+      "show-passive-items": true
+    },
+
+    "custom/power": {
+      "format":      "⏻",
+      "tooltip":     false,
+      "on-click":    "xii-power-menu",
+      "on-click-right": "systemctl suspend"
+    }
+  }
+]

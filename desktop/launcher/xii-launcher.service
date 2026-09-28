@@ -1,0 +1,22 @@
+[Unit]
+Description=XII OS Application Launcher
+Documentation=https://xii-os.org/docs/launcher
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+# Socket-activated: launcher starts on first invocation
+Type=simple
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/desktop/launcher/xii-launcher.py
+Restart=on-failure
+RestartSec=2
+
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_CURRENT_DESKTOP=Hyprland
+Environment=GDK_BACKEND=wayland
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=graphical-session.target

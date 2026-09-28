@@ -1,0 +1,28 @@
+[Unit]
+Description=XII OS Status Bar (Waybar)
+Documentation=https://xii-os.org/docs/statusbar
+PartOf=graphical-session.target
+After=graphical-session.target xii-init.service
+Requires=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/waybar \
+    --config /etc/xii-os/desktop/waybar/config.jsonc \
+    --style  /etc/xii-os/desktop/waybar/style.css
+ExecReload=/bin/kill -SIGUSR2 $MAINPID
+Restart=on-failure
+RestartSec=3
+
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_CURRENT_DESKTOP=Hyprland
+Environment=GTK_THEME=XII-OS-Dark
+
+# Sandbox
+NoNewPrivileges=yes
+ProtectHome=no
+ProtectSystem=no
+PrivateTmp=yes
+
+[Install]
+WantedBy=graphical-session.target

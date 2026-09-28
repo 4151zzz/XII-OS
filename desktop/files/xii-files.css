@@ -1,0 +1,182 @@
+/* ============================================================
+ * XII OS — File Manager Stylesheet
+ * desktop/files/xii-files.css
+ * ============================================================ */
+
+/* ─── Window ─────────────────────────────────────────────── */
+.files-window {
+  background: hsl(240, 12%, 7%);
+}
+
+/* ─── Header bar ─────────────────────────────────────────── */
+.files-headerbar {
+  background: rgba(10, 10, 18, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: none;
+}
+
+/* ─── Breadcrumb ─────────────────────────────────────────── */
+.breadcrumb-bar {
+  background: transparent;
+  padding: 0 4px;
+}
+
+.breadcrumb-btn {
+  background:    transparent;
+  border:        none;
+  border-radius: 6px;
+  color:         rgba(200, 200, 220, 0.65);
+  font-size:     13px;
+  font-weight:   400;
+  padding:       2px 6px;
+  transition:    all 120ms ease;
+}
+
+.breadcrumb-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color:      #dcdce8;
+}
+
+.breadcrumb-btn.breadcrumb-current {
+  color:       #e8e8f0;
+  font-weight: 600;
+}
+
+.breadcrumb-sep {
+  color:     rgba(255,255,255,0.25);
+  font-size: 13px;
+}
+
+/* ─── Sidebar ────────────────────────────────────────────── */
+.files-sidebar-scroll,
+.files-sidebar {
+  background: rgba(8, 8, 15, 0.60);
+}
+
+.sidebar-section-title {
+  color:           rgba(255,255,255,0.30);
+  font-size:       10px;
+  font-weight:     700;
+  letter-spacing:  0.10em;
+}
+
+.sidebar-row {
+  background:    transparent;
+  border:        none;
+  border-radius: 8px;
+  margin:        1px 6px;
+  transition:    background 120ms ease;
+}
+
+.sidebar-row:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+.sidebar-row:active {
+  background: rgba(110, 231, 247, 0.10);
+}
+
+.sidebar-icon {
+  color:   rgba(200,200,220,0.70);
+  opacity: 0.85;
+}
+
+.sidebar-label {
+  color:       rgba(200,200,220,0.85);
+  font-size:   13px;
+  font-weight: 400;
+}
+
+/* ─── Separator ──────────────────────────────────────────── */
+.files-sep {
+  background: rgba(255,255,255,0.06);
+  min-width:  1px;
+}
+
+/* ─── File grid ──────────────────────────────────────────── */
+.file-grid {
+  background: transparent;
+  padding:    12px;
+}
+
+.file-cell {
+  border-radius: 10px;
+  min-width:     90px;
+  max-width:     120px;
+  transition:    background 100ms ease;
+}
+
+.file-cell:selected {
+  background: rgba(110, 231, 247, 0.12);
+}
+
+.file-cell-inner {
+  background: transparent;
+  padding:    6px;
+  border-radius: 10px;
+}
+
+.file-cell:hover > .file-cell-inner {
+  background: rgba(255,255,255,0.06);
+}
+
+.file-icon {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.file-name {
+  color:       #c8c8d8;
+  font-size:   12px;
+  font-weight: 400;
+  text-align:  center;
+}
+
+.file-cell:selected .file-name {
+  color: #6ee7f7;
+}
+
+/* ─── File list ──────────────────────────────────────────── */
+.file-list {
+  background: transparent;
+  border:     none;
+  padding:    4px 8px;
+}
+
+.file-row {
+  background:    transparent;
+  border-radius: 8px;
+  margin:        1px 0;
+  transition:    background 100ms ease;
+}
+
+.file-row:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.file-row:selected {
+  background: rgba(110, 231, 247, 0.10);
+}
+
+.file-row:selected .file-name {
+  color: #6ee7f7;
+}
+
+.file-meta {
+  color:     rgba(200,200,220,0.40);
+  font-size: 12px;
+  min-width: 64px;
+}
+
+/* ─── Search bar ─────────────────────────────────────────── */
+searchbar {
+  background: rgba(10, 10, 18, 0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ─── Status bar ─────────────────────────────────────────── */
+.files-status {
+  color:     rgba(200,200,220,0.35);
+  font-size: 11px;
+}

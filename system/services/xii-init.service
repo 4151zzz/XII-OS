@@ -1,0 +1,24 @@
+[Unit]
+Description=XII OS Boot Initialization
+Documentation=https://xii-os.org/docs/init
+DefaultDependencies=no
+After=local-fs.target systemd-udev-settle.service
+Before=sysinit.target multi-user.target
+ConditionPathExists=/etc/xii-os/version
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/xii-os/xii-init.sh
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=xii-init
+
+# Security hardening
+PrivateTmp=no
+ProtectHostname=yes
+ProtectClock=no
+ProtectKernelLogs=no
+
+[Install]
+WantedBy=multi-user.target

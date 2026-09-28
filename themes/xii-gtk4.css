@@ -1,0 +1,345 @@
+/* ============================================================
+ * XII OS — GTK4 / Libadwaita Theme Override
+ * themes/xii-gtk4.css
+ *
+ * Overrides GTK4 / Libadwaita widget styling to match the
+ * XII OS design system. Applied via:
+ *   $XDG_CONFIG_HOME/gtk-4.0/gtk.css  →  symlink here
+ * ============================================================ */
+
+@import url("xii-global.css");
+
+/* ─────────────────────────────────────────────────────────── */
+/* Root window                                                  */
+/* ─────────────────────────────────────────────────────────── */
+window,
+.background {
+  background-color: var(--xii-bg-base);
+  color: var(--xii-text-primary);
+  font-family: var(--xii-font-sans);
+  font-size: var(--xii-text-base);
+}
+
+window.maximized,
+window.fullscreen {
+  border-radius: 0;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Header bar (title bar)                                      */
+/* ─────────────────────────────────────────────────────────── */
+headerbar,
+.titlebar {
+  background-color: var(--xii-bg-elevated);
+  border-bottom: 1px solid var(--xii-border-subtle);
+  box-shadow: none;
+  padding: 0 var(--xii-space-3);
+  min-height: 42px;
+  color: var(--xii-text-primary);
+  font-weight: var(--xii-weight-medium);
+}
+
+headerbar .title {
+  font-size: var(--xii-text-sm);
+  font-weight: var(--xii-weight-semibold);
+  letter-spacing: var(--xii-tracking-wide);
+  color: var(--xii-text-primary);
+}
+
+headerbar .subtitle {
+  font-size: var(--xii-text-xs);
+  color: var(--xii-text-muted);
+}
+
+/* Window control buttons */
+.titlebar button.circular,
+headerbar button.circular {
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: var(--xii-radius-full);
+  padding: 0;
+  background: var(--xii-bg-overlay);
+  border: 1px solid var(--xii-border-subtle);
+  color: var(--xii-text-secondary);
+  transition:
+    background var(--xii-dur-fast) var(--xii-ease),
+    box-shadow  var(--xii-dur-fast) var(--xii-ease);
+}
+
+.titlebar button.circular:hover {
+  background: var(--xii-border-default);
+  color: var(--xii-text-primary);
+}
+
+/* Close button */
+.titlebar button.circular.close:hover {
+  background: var(--xii-error);
+  border-color: transparent;
+  color: white;
+}
+
+/* Minimize / maximize */
+.titlebar button.circular.minimize:hover {
+  background: var(--xii-warning);
+  border-color: transparent;
+  color: var(--xii-text-inverse);
+}
+.titlebar button.circular.maximize:hover {
+  background: var(--xii-success);
+  border-color: transparent;
+  color: var(--xii-text-inverse);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Buttons                                                     */
+/* ─────────────────────────────────────────────────────────── */
+button {
+  background: var(--xii-bg-elevated);
+  border: 1px solid var(--xii-border-default);
+  border-radius: var(--xii-radius-md);
+  color: var(--xii-text-primary);
+  font-family: var(--xii-font-sans);
+  font-size: var(--xii-text-sm);
+  font-weight: var(--xii-weight-medium);
+  padding: var(--xii-space-2) var(--xii-space-4);
+  transition:
+    background  var(--xii-dur-fast) var(--xii-ease),
+    border-color var(--xii-dur-fast) var(--xii-ease),
+    box-shadow  var(--xii-dur-fast) var(--xii-ease);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: var(--xii-bg-overlay);
+  border-color: var(--xii-border-strong);
+}
+
+button:active:not(:disabled) {
+  background: var(--xii-bg-deep);
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  box-shadow: 0 0 0 2px var(--xii-bg-base), 0 0 0 4px var(--xii-border-focus);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Suggested (primary) button */
+button.suggested-action {
+  background: var(--xii-cyan);
+  border-color: transparent;
+  color: var(--xii-text-inverse);
+  font-weight: var(--xii-weight-semibold);
+  box-shadow: 0 2px 8px var(--xii-cyan-glow);
+}
+
+button.suggested-action:hover:not(:disabled) {
+  background: hsl(190, 90%, 75%);
+  box-shadow: 0 4px 16px var(--xii-cyan-glow);
+}
+
+/* Destructive button */
+button.destructive-action {
+  background: hsla(4, 80%, 60%, 0.15);
+  border-color: hsla(4, 80%, 60%, 0.30);
+  color: var(--xii-error);
+}
+
+button.destructive-action:hover:not(:disabled) {
+  background: var(--xii-error);
+  border-color: transparent;
+  color: white;
+}
+
+/* Flat button */
+button.flat {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+button.flat:hover {
+  background: var(--xii-bg-glass-hover);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Entries (text inputs)                                       */
+/* ─────────────────────────────────────────────────────────── */
+entry,
+.entry {
+  background: var(--xii-bg-elevated);
+  border: 1px solid var(--xii-border-default);
+  border-radius: var(--xii-radius-md);
+  color: var(--xii-text-primary);
+  caret-color: var(--xii-cyan);
+  font-family: var(--xii-font-sans);
+  font-size: var(--xii-text-sm);
+  padding: var(--xii-space-2) var(--xii-space-3);
+  transition:
+    border-color var(--xii-dur-fast) var(--xii-ease),
+    box-shadow   var(--xii-dur-fast) var(--xii-ease);
+}
+
+entry:focus,
+.entry:focus {
+  border-color: var(--xii-border-focus);
+  box-shadow: 0 0 0 3px var(--xii-cyan-glow);
+}
+
+entry::placeholder {
+  color: var(--xii-text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Lists & rows                                                */
+/* ─────────────────────────────────────────────────────────── */
+listview,
+listbox {
+  background: transparent;
+  border: none;
+}
+
+listview row,
+listboxrow {
+  background: transparent;
+  border-radius: var(--xii-radius-md);
+  padding: var(--xii-space-2) var(--xii-space-3);
+  transition: background var(--xii-dur-fast) var(--xii-ease);
+}
+
+listview row:hover,
+listboxrow:hover {
+  background: var(--xii-bg-glass-hover);
+}
+
+listview row:selected,
+listboxrow:selected {
+  background: hsla(190, 90%, 70%, 0.12);
+  color: var(--xii-cyan);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Switches                                                    */
+/* ─────────────────────────────────────────────────────────── */
+switch {
+  background: var(--xii-bg-overlay);
+  border: 1px solid var(--xii-border-default);
+  border-radius: var(--xii-radius-full);
+  min-width: 48px;
+  min-height: 26px;
+  transition: background var(--xii-dur-fast) var(--xii-ease);
+}
+
+switch:checked {
+  background: var(--xii-cyan);
+  border-color: transparent;
+  box-shadow: 0 2px 8px var(--xii-cyan-glow);
+}
+
+switch slider {
+  background: white;
+  border-radius: var(--xii-radius-full);
+  box-shadow: 0 1px 4px hsla(0,0%,0%,0.3);
+  min-width: 20px;
+  min-height: 20px;
+  margin: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Scrollbars                                                  */
+/* ─────────────────────────────────────────────────────────── */
+scrollbar {
+  background: transparent;
+  border: none;
+}
+
+scrollbar slider {
+  background: var(--xii-border-default);
+  border-radius: var(--xii-radius-full);
+  min-width: 6px;
+  min-height: 6px;
+  margin: 2px;
+}
+
+scrollbar slider:hover {
+  background: var(--xii-border-strong);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Menus / Popovers                                            */
+/* ─────────────────────────────────────────────────────────── */
+popover,
+.popover {
+  background: hsla(240, 14%, 10%, 0.90);
+  border: 1px solid var(--xii-border-default);
+  border-radius: var(--xii-radius-xl);
+  box-shadow: var(--xii-shadow-xl);
+  padding: var(--xii-space-2);
+}
+
+popover > arrow {
+  background: inherit;
+  border: inherit;
+}
+
+menu,
+.menu {
+  background: hsla(240, 14%, 10%, 0.92);
+  border: 1px solid var(--xii-border-default);
+  border-radius: var(--xii-radius-xl);
+  box-shadow: var(--xii-shadow-xl);
+  padding: var(--xii-space-2);
+}
+
+menuitem {
+  border-radius: var(--xii-radius-md);
+  color: var(--xii-text-primary);
+  font-size: var(--xii-text-sm);
+  padding: var(--xii-space-2) var(--xii-space-3);
+  transition: background var(--xii-dur-fast) var(--xii-ease);
+}
+
+menuitem:hover {
+  background: var(--xii-bg-glass-hover);
+  color: var(--xii-text-primary);
+}
+
+menuitem accelerator {
+  color: var(--xii-text-muted);
+  font-size: var(--xii-text-xs);
+}
+
+/* Separator in menus */
+separator {
+  background: var(--xii-border-subtle);
+  min-height: 1px;
+  margin: var(--xii-space-1) var(--xii-space-3);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Sidebar / NavigationSidebar                                 */
+/* ─────────────────────────────────────────────────────────── */
+.sidebar,
+navigationview .sidebar,
+leaflet .sidebar {
+  background: var(--xii-bg-elevated);
+  border-right: 1px solid var(--xii-border-subtle);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Notifications (in-app toasts)                               */
+/* ─────────────────────────────────────────────────────────── */
+toast {
+  background: hsla(240, 14%, 12%, 0.90);
+  backdrop-filter: blur(var(--xii-blur-md));
+  border: 1px solid var(--xii-border-default);
+  border-radius: var(--xii-radius-full);
+  box-shadow: var(--xii-shadow-lg);
+  color: var(--xii-text-primary);
+  font-size: var(--xii-text-sm);
+  padding: var(--xii-space-2) var(--xii-space-4);
+}

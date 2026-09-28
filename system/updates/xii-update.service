@@ -1,0 +1,11 @@
+[Unit]
+Description=XII OS Automated Update Checker
+Documentation=man:xii-update(1)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/updates/xii-update.py check
+StandardOutput=journal
+StandardError=journal

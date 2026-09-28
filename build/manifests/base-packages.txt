@@ -1,0 +1,125 @@
+# XII OS — Minimal Base Package Manifest
+# Phase 1: Bootable Linux Base
+# ─────────────────────────────────────────────────────────────
+# This file lists all packages included in the XII OS
+# minimal base rootfs. It is consumed by bootstrap-base.sh
+# via debootstrap --include flag.
+#
+# Format: one package per line, comments start with #
+# ─────────────────────────────────────────────────────────────
+
+# ═══════════════════════════════════════════════════════════
+# BOOT & KERNEL
+# ═══════════════════════════════════════════════════════════
+linux-image-amd64
+linux-headers-amd64
+initramfs-tools
+grub-pc
+grub-efi-amd64
+grub-efi-amd64-bin
+efibootmgr
+os-prober
+
+# ═══════════════════════════════════════════════════════════
+# INIT & SYSTEM SERVICES
+# ═══════════════════════════════════════════════════════════
+systemd
+systemd-sysv
+udev
+dbus
+libpam-systemd
+
+# ═══════════════════════════════════════════════════════════
+# CORE UTILITIES (POSIX)
+# ═══════════════════════════════════════════════════════════
+bash
+coreutils
+util-linux
+bsdutils
+findutils
+diffutils
+grep
+sed
+gawk
+tar
+gzip
+bzip2
+xz-utils
+file
+less
+nano
+vim-tiny
+
+# ═══════════════════════════════════════════════════════════
+# FILESYSTEM TOOLS
+# ═══════════════════════════════════════════════════════════
+e2fsprogs
+btrfs-progs
+dosfstools
+xfsprogs
+parted
+gdisk
+lsblk
+
+# ═══════════════════════════════════════════════════════════
+# MEMORY & PERFORMANCE
+# ═══════════════════════════════════════════════════════════
+zram-tools
+procps
+sysstat
+linux-cpupower
+
+# ═══════════════════════════════════════════════════════════
+# NETWORKING BASE
+# ═══════════════════════════════════════════════════════════
+iproute2
+iputils-ping
+isc-dhcp-client
+systemd-resolved
+curl
+wget
+ca-certificates
+openssl
+openssh-client
+
+# ═══════════════════════════════════════════════════════════
+# HARDWARE SUPPORT
+# ═══════════════════════════════════════════════════════════
+pciutils
+usbutils
+lshw
+hdparm
+dmidecode
+acpid
+thermald
+
+# ═══════════════════════════════════════════════════════════
+# PACKAGE MANAGEMENT
+# ═══════════════════════════════════════════════════════════
+apt
+apt-utils
+dpkg
+debconf
+gnupg
+apt-transport-https
+
+# ═══════════════════════════════════════════════════════════
+# SYSTEM LOGGING
+# ═══════════════════════════════════════════════════════════
+systemd-journal-remote
+
+# ═══════════════════════════════════════════════════════════
+# AUTHENTICATION & SECURITY
+# ═══════════════════════════════════════════════════════════
+sudo
+login
+passwd
+libpam-runtime
+polkit
+
+# ═══════════════════════════════════════════════════════════
+# XII OS RUNTIME DEPENDENCIES (custom)
+# ═══════════════════════════════════════════════════════════
+python3
+python3-dbus
+# xii-os-base         <- built from source via bootstrap-base.sh

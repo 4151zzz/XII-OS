@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily Timer for XII OS Update Checks
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=1800
+
+[Install]
+WantedBy=timers.target

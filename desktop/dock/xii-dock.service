@@ -1,0 +1,24 @@
+[Unit]
+Description=XII OS Reactive Dock
+Documentation=https://xii-os.org/docs/dock
+PartOf=graphical-session.target
+After=graphical-session.target xii-statusbar.service
+Requires=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/desktop/dock/xii-dock.py \
+    --config /etc/xii-os/desktop/dock/dock-config.json
+ExecReload=/bin/kill -SIGUSR1 $MAINPID
+Restart=on-failure
+RestartSec=3
+
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_CURRENT_DESKTOP=Hyprland
+Environment=GDK_BACKEND=wayland
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=graphical-session.target

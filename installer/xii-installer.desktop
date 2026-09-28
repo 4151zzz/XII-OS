@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Install XII OS 1.0
+GenericName=Operating System Installer
+Comment=Install XII OS permanently onto your hard drive or SSD
+Exec=/usr/bin/python3 /usr/lib/xii-os/installer/xii-installer.py
+Icon=system-installer-symbolic
+Terminal=false
+Type=Application
+Categories=System;GTK;
+StartupNotify=true
+Keywords=install;setup;disk;live;
+X-XII-App=true

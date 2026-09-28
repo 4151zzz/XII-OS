@@ -1,0 +1,19 @@
+[Unit]
+Description=XII OS Settings Center
+Documentation=https://xii-os.org/docs/settings
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/desktop/settings/xii-settings.py
+Restart=on-failure
+RestartSec=3
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_CURRENT_DESKTOP=Hyprland
+Environment=GDK_BACKEND=wayland
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=graphical-session.target

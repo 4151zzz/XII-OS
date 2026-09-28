@@ -1,0 +1,22 @@
+[Unit]
+Description=XII OS Security Daemon & Integrity Monitor
+Documentation=man:xii-security(1)
+After=network.target local-fs.target
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/security/xii-security.py daemon
+Restart=on-failure
+RestartSec=10s
+User=root
+Group=root
+
+# Security hardening for daemon
+ProtectSystem=full
+ProtectHome=read-only
+NoNewPrivileges=false
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

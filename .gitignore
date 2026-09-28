@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Build artifacts & temp files
+build/*.iso
+build/*.iso.sha256
+build/rootfs/
+build/iso-staging/
+build/temp_*
+build/*.img
+build/*.bin
+build/xii-os-1.0-release/
+
+# OS generated files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,153 @@
+/* ============================================================
+ * XII OS — Application Launcher Stylesheet
+ * desktop/launcher/xii-launcher.css
+ * ============================================================ */
+
+/* ─── Launcher window — glassmorphic floating panel ──────── */
+.launcher-window {
+  background:      rgba(10, 10, 18, 0.82);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border:          1px solid rgba(255, 255, 255, 0.11);
+  border-radius:   24px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.60),
+    0  4px 16px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.launcher-root {
+  background: transparent;
+}
+
+/* ─── Search bar ─────────────────────────────────────────── */
+.launcher-search-box {
+  background:    rgba(255, 255, 255, 0.05);
+  border:        1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 14px;
+}
+
+.launcher-search-icon {
+  color:      #606080;
+  margin-left: 4px;
+}
+
+.launcher-search-entry {
+  background:  transparent;
+  border:      none;
+  box-shadow:  none;
+  color:       #e8e8f0;
+  font-size:   16px;
+  font-weight: 400;
+  caret-color: #6ee7f7;
+  padding:     10px 4px;
+}
+
+.launcher-search-entry:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.launcher-search-entry::placeholder {
+  color: #404060;
+}
+
+/* ─── Category chips ─────────────────────────────────────── */
+.launcher-cat-scroll {
+  background: transparent;
+}
+
+.launcher-categories {
+  padding: 2px 0 4px;
+}
+
+.launcher-cat-btn {
+  background:    rgba(255, 255, 255, 0.05);
+  border:        1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  color:         #808098;
+  font-size:     12px;
+  font-weight:   500;
+  padding:       3px 12px;
+  min-height:    0;
+  transition:
+    background   150ms ease,
+    border-color 150ms ease,
+    color        150ms ease;
+}
+
+.launcher-cat-btn:hover {
+  background:    rgba(255, 255, 255, 0.09);
+  border-color:  rgba(255, 255, 255, 0.14);
+  color:         #c0c0d8;
+}
+
+.launcher-cat-btn:checked,
+.launcher-cat-btn.active {
+  background:    rgba(110, 231, 247, 0.12);
+  border-color:  rgba(110, 231, 247, 0.30);
+  color:         #6ee7f7;
+  font-weight:   600;
+}
+
+/* ─── Separator ──────────────────────────────────────────── */
+.launcher-sep {
+  background: rgba(255, 255, 255, 0.06);
+  min-height: 1px;
+  margin:     0 16px;
+}
+
+/* ─── Results list ───────────────────────────────────────── */
+.launcher-list {
+  background: transparent;
+  border:     none;
+  padding:    6px 8px;
+}
+
+/* ─── App row ────────────────────────────────────────────── */
+.launcher-row {
+  background:    transparent;
+  border-radius: 12px;
+  margin:        1px 0;
+  transition:    background 100ms ease;
+}
+
+.launcher-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.launcher-row:selected {
+  background: rgba(110, 231, 247, 0.10);
+}
+
+.launcher-row:selected .launcher-app-name {
+  color: #6ee7f7;
+}
+
+.launcher-icon {
+  opacity: 0.92;
+  transition: opacity 100ms ease;
+}
+
+.launcher-row:hover .launcher-icon,
+.launcher-row:selected .launcher-icon {
+  opacity: 1.0;
+}
+
+.launcher-app-name {
+  color:       #dcdce8;
+  font-size:   14px;
+  font-weight: 500;
+}
+
+.launcher-app-desc {
+  color:     #606070;
+  font-size: 12px;
+}
+
+/* ─── Status bar ─────────────────────────────────────────── */
+.launcher-status {
+  color:     #505068;
+  font-size: 11px;
+}

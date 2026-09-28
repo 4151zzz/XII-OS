@@ -1,0 +1,130 @@
+/* ============================================================
+ * XII OS — Settings Center Stylesheet
+ * desktop/settings/xii-settings.css
+ * ============================================================ */
+
+/* ─── Window ─────────────────────────────────────────────── */
+.settings-window {
+  background: hsl(240, 12%, 7%);
+}
+
+/* ─── Sidebar ────────────────────────────────────────────── */
+.settings-sidebar-header {
+  background: rgba(8, 8, 14, 0.70);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.settings-sidebar-list {
+  background: transparent;
+  border: none;
+  padding: 4px 6px;
+}
+
+.settings-sidebar-list > row {
+  border-radius: 8px;
+  margin: 1px 0;
+  transition: background 120ms ease;
+}
+
+.settings-sidebar-list > row:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.settings-sidebar-list > row:selected {
+  background: rgba(110, 231, 247, 0.10);
+}
+
+.settings-sidebar-list > row:selected .settings-sidebar-label {
+  color:       #6ee7f7;
+  font-weight: 600;
+}
+
+.settings-sidebar-list > row:selected .settings-sidebar-icon {
+  color: #6ee7f7;
+}
+
+.settings-sidebar-icon {
+  color:   rgba(200,200,220,0.65);
+  opacity: 0.9;
+  transition: color 120ms ease;
+}
+
+.settings-sidebar-label {
+  color:       rgba(200,200,220,0.85);
+  font-size:   13px;
+  font-weight: 400;
+  transition:  color 120ms ease;
+}
+
+.settings-search {
+  font-size: 13px;
+}
+
+/* ─── Content header ─────────────────────────────────────── */
+.settings-content-header {
+  background: rgba(10, 10, 18, 0.70);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ─── Preference rows override ───────────────────────────── */
+preferencesgroup > box > label {
+  color:       rgba(200,200,220,0.90);
+  font-weight: 600;
+  font-size:   14px;
+}
+
+row.activatable:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+row:selected {
+  background: rgba(110, 231, 247, 0.08);
+}
+
+/* ─── Wallpaper preview ──────────────────────────────────── */
+.wallpaper-preview {
+  background:
+    radial-gradient(ellipse at 30% 30%, hsla(190,90%,70%,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, hsla(260,80%,72%,0.10) 0%, transparent 60%),
+    hsl(240, 15%, 5%);
+  border:        1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  box-shadow:    0 4px 16px rgba(0,0,0,0.40);
+}
+
+/* ─── About page ─────────────────────────────────────────── */
+.about-logo {
+  color: #6ee7f7;
+}
+
+.about-name {
+  font-size:      32px;
+  font-weight:    300;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #6ee7f7, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-version {
+  font-size:   14px;
+  font-weight: 400;
+  color:       rgba(200,200,220,0.45);
+}
+
+/* ─── XII Mode rows ──────────────────────────────────────── */
+.xii-mode-row-performance row:selected,
+.xii-mode-row-performance:selected {
+  border-left: 3px solid #a78bfa;
+}
+
+.xii-mode-row-standard row:selected,
+.xii-mode-row-standard:selected {
+  border-left: 3px solid #6ee7f7;
+}
+
+.xii-mode-row-lite row:selected,
+.xii-mode-row-lite:selected {
+  border-left: 3px solid #4ade80;
+}

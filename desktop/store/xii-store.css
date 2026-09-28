@@ -1,0 +1,160 @@
+/* ============================================================
+ * XII OS — App Store Stylesheet
+ * desktop/store/xii-store.css
+ * ============================================================ */
+
+/* ─── Window ─────────────────────────────────────────────── */
+.store-window {
+  background: hsl(240, 12%, 7%);
+}
+
+/* ─── Sidebar ────────────────────────────────────────────── */
+.store-sidebar-header {
+  background:    rgba(8, 8, 14, 0.72);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.store-cat-list {
+  background: transparent;
+  border:     none;
+  padding:    4px 6px;
+}
+
+.store-cat-list > row {
+  border-radius: 8px;
+  margin:        1px 0;
+  transition:    background 120ms ease;
+}
+
+.store-cat-list > row:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.store-cat-list > row:selected {
+  background: rgba(110, 231, 247, 0.10);
+}
+
+.store-cat-list > row:selected .store-cat-label {
+  color:       #6ee7f7;
+  font-weight: 600;
+}
+
+.store-cat-list > row:selected .store-cat-icon {
+  color: #6ee7f7;
+}
+
+.store-cat-icon {
+  color:   rgba(200,200,220,0.65);
+  transition: color 120ms ease;
+}
+
+.store-cat-label {
+  color:     rgba(200,200,220,0.85);
+  font-size: 13px;
+}
+
+/* ─── Content header ─────────────────────────────────────── */
+.store-content-header {
+  background:    rgba(10, 10, 18, 0.70);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.store-content-title {
+  font-size:   16px;
+  font-weight: 600;
+  color:       #e8e8f0;
+}
+
+/* ─── App grid ───────────────────────────────────────────── */
+.store-grid {
+  background: transparent;
+}
+
+/* ─── App card ───────────────────────────────────────────── */
+.store-card {
+  background:    rgba(255,255,255,0.04);
+  border:        1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding:       16px 12px;
+  min-width:     140px;
+  max-width:     170px;
+  cursor:        pointer;
+  transition:
+    background   150ms ease,
+    border-color 150ms ease,
+    transform    200ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow   150ms ease;
+}
+
+.store-card:hover {
+  background:    rgba(255,255,255,0.07);
+  border-color:  rgba(110, 231, 247, 0.22);
+  transform:     translateY(-4px);
+  box-shadow:    0 12px 32px rgba(0,0,0,0.40);
+}
+
+.store-card-icon {
+  margin-left:  auto;
+  margin-right: auto;
+  margin-bottom: 4px;
+}
+
+.store-card-name {
+  color:       #dcdce8;
+  font-size:   13px;
+  font-weight: 600;
+  text-align:  center;
+}
+
+.store-card-dev {
+  color:     rgba(200,200,220,0.45);
+  font-size: 11px;
+  text-align: center;
+}
+
+/* ─── Stars ──────────────────────────────────────────────── */
+.store-stars {
+  color:     #facc15;
+  font-size: 11px;
+}
+
+/* ─── Verified badge ─────────────────────────────────────── */
+.store-verified-badge {
+  background:    rgba(110, 231, 247, 0.18);
+  border:        1px solid rgba(110, 231, 247, 0.30);
+  border-radius: 9999px;
+  color:         #6ee7f7;
+  font-size:     9px;
+  font-weight:   700;
+  padding:       0 5px;
+}
+
+/* ─── Install button ─────────────────────────────────────── */
+.store-install-btn {
+  border-radius: 8px;
+  font-size:     12px;
+  font-weight:   600;
+  padding:       4px 14px;
+  margin-top:    4px;
+  transition:    all 150ms ease;
+}
+
+.store-install-btn:hover {
+  transform: scale(1.04);
+}
+
+.store-installed-btn {
+  background:    rgba(255,255,255,0.05);
+  border:        1px solid rgba(255,255,255,0.10);
+  border-radius: 8px;
+  color:         rgba(200,200,220,0.45);
+  font-size:     12px;
+  padding:       4px 14px;
+  margin-top:    4px;
+}
+
+/* ─── Status bar ─────────────────────────────────────────── */
+.store-status {
+  color:     rgba(200,200,220,0.35);
+  font-size: 11px;
+}

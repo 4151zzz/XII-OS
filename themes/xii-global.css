@@ -1,0 +1,277 @@
+/* ============================================================
+ * XII OS — Global CSS Custom Properties
+ * themes/xii-global.css
+ *
+ * This file maps design tokens (tokens.json) to CSS custom
+ * properties consumed by all XII OS desktop components.
+ *
+ * Load order:
+ *   1. xii-global.css       ← this file (root variables)
+ *   2. xii-glassmorphism.css ← glass utilities
+ *   3. xii-gtk4.css          ← GTK4 widget overrides
+ *   4. Component stylesheets
+ * ============================================================ */
+
+/* ─────────────────────────────────────────────────────────── */
+/* @import: System fonts                                        */
+/* ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+/* ─────────────────────────────────────────────────────────── */
+/* Root — XII Standard Mode (default)                          */
+/* ─────────────────────────────────────────────────────────── */
+:root,
+.xii-standard {
+  /* Backgrounds */
+  --xii-bg-deep:        hsl(240, 15%,  4%);
+  --xii-bg-base:        hsl(240, 12%,  7%);
+  --xii-bg-elevated:    hsl(240, 10%, 11%);
+  --xii-bg-overlay:     hsl(240,  9%, 15%);
+  --xii-bg-glass:       hsla(240, 15%, 100%, 0.06);
+  --xii-bg-glass-hover: hsla(240, 15%, 100%, 0.10);
+
+  /* Accent colors */
+  --xii-cyan:        hsl(190, 90%, 70%);
+  --xii-cyan-dim:    hsl(190, 60%, 45%);
+  --xii-cyan-glow:   hsla(190, 90%, 70%, 0.25);
+  --xii-purple:      hsl(260, 80%, 72%);
+  --xii-purple-dim:  hsl(260, 50%, 50%);
+  --xii-rose:        hsl(330, 75%, 68%);
+  --xii-rose-dim:    hsl(330, 45%, 48%);
+
+  /* Gradient utilities */
+  --xii-grad-primary: linear-gradient(135deg, var(--xii-cyan), var(--xii-purple));
+  --xii-grad-warm:    linear-gradient(135deg, var(--xii-purple), var(--xii-rose));
+  --xii-grad-full:    linear-gradient(135deg, var(--xii-cyan), var(--xii-purple), var(--xii-rose));
+  --xii-grad-bg:      linear-gradient(160deg, hsl(240,15%,5%), hsl(250,15%,8%));
+
+  /* Semantic */
+  --xii-success:  hsl(142, 70%, 55%);
+  --xii-warning:  hsl( 38, 90%, 60%);
+  --xii-error:    hsl(  4, 80%, 60%);
+  --xii-info:     hsl(210, 85%, 65%);
+
+  /* Text */
+  --xii-text-primary:   hsl(240, 10%, 92%);
+  --xii-text-secondary: hsl(240,  8%, 68%);
+  --xii-text-muted:     hsl(240,  6%, 45%);
+  --xii-text-inverse:   hsl(240, 15%,  6%);
+  --xii-text-accent:    var(--xii-cyan);
+
+  /* Borders */
+  --xii-border-subtle:  hsla(240, 20%, 100%, 0.07);
+  --xii-border-default: hsla(240, 20%, 100%, 0.12);
+  --xii-border-strong:  hsla(240, 20%, 100%, 0.20);
+  --xii-border-focus:   var(--xii-cyan);
+
+  /* Typography */
+  --xii-font-sans:    'Inter', 'Noto Sans', system-ui, sans-serif;
+  --xii-font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+  --xii-font-display: 'Inter', 'Outfit', system-ui, sans-serif;
+
+  --xii-text-xs:   11px;
+  --xii-text-sm:   13px;
+  --xii-text-base: 14px;
+  --xii-text-md:   15px;
+  --xii-text-lg:   18px;
+  --xii-text-xl:   22px;
+  --xii-text-2xl:  28px;
+  --xii-text-3xl:  36px;
+  --xii-text-4xl:  48px;
+
+  --xii-weight-light:    300;
+  --xii-weight-regular:  400;
+  --xii-weight-medium:   500;
+  --xii-weight-semibold: 600;
+  --xii-weight-bold:     700;
+
+  --xii-leading-tight:  1.2;
+  --xii-leading-normal: 1.5;
+  --xii-leading-loose:  1.8;
+
+  --xii-tracking-tight:   -0.02em;
+  --xii-tracking-normal:   0em;
+  --xii-tracking-wide:     0.04em;
+  --xii-tracking-wider:    0.10em;
+  --xii-tracking-widest:   0.20em;
+
+  /* Spacing */
+  --xii-space-0:   0px;
+  --xii-space-1:   4px;
+  --xii-space-2:   8px;
+  --xii-space-3:  12px;
+  --xii-space-4:  16px;
+  --xii-space-5:  20px;
+  --xii-space-6:  24px;
+  --xii-space-8:  32px;
+  --xii-space-10: 40px;
+  --xii-space-12: 48px;
+  --xii-space-16: 64px;
+
+  /* Border radius */
+  --xii-radius-none: 0px;
+  --xii-radius-sm:   6px;
+  --xii-radius-md:  10px;
+  --xii-radius-lg:  14px;
+  --xii-radius-xl:  20px;
+  --xii-radius-2xl: 28px;
+  --xii-radius-full: 9999px;
+
+  /* Shadows */
+  --xii-shadow-sm: 0 1px  4px hsla(240,20%,0%,0.25);
+  --xii-shadow-md: 0 4px 12px hsla(240,20%,0%,0.35), 0 1px 3px hsla(240,20%,0%,0.2);
+  --xii-shadow-lg: 0 8px 24px hsla(240,20%,0%,0.45), 0 2px 6px  hsla(240,20%,0%,0.25);
+  --xii-shadow-xl: 0 16px 48px hsla(240,20%,0%,0.55), 0 4px 12px hsla(240,20%,0%,0.3);
+  --xii-shadow-glow-cyan:   0 0 20px hsla(190,90%,70%,0.30), 0 0 60px hsla(190,90%,70%,0.10);
+  --xii-shadow-glow-purple: 0 0 20px hsla(260,80%,72%,0.25), 0 0 60px hsla(260,80%,72%,0.08);
+
+  /* Blur */
+  --xii-blur-sm: 8px;
+  --xii-blur-md: 16px;
+  --xii-blur-lg: 24px;
+  --xii-blur-xl: 40px;
+
+  /* Glassmorphism composite */
+  --xii-glass-blur: blur(var(--xii-blur-md));
+  --xii-glass-bg:   var(--xii-bg-glass);
+  --xii-glass-border: 1px solid var(--xii-border-default);
+  --xii-glass-shadow: var(--xii-shadow-lg);
+
+  /* Animation */
+  --xii-dur-instant: 80ms;
+  --xii-dur-fast:    150ms;
+  --xii-dur-normal:  250ms;
+  --xii-dur-slow:    400ms;
+  --xii-dur-slower:  600ms;
+
+  --xii-ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --xii-ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --xii-ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --xii-spring:      cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --xii-smooth:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Component dimensions */
+  --xii-statusbar-height: 34px;
+  --xii-dock-icon-size:   52px;
+  --xii-dock-padding:     10px;
+  --xii-icon-xs:  16px;
+  --xii-icon-sm:  22px;
+  --xii-icon-md:  32px;
+  --xii-icon-lg:  48px;
+  --xii-icon-xl:  64px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* XII Lite Mode overrides — minimal blur, no heavy effects    */
+/* ─────────────────────────────────────────────────────────── */
+.xii-lite {
+  --xii-bg-glass:       hsla(240, 15%, 100%, 0.04);
+  --xii-bg-glass-hover: hsla(240, 15%, 100%, 0.07);
+
+  /* Reduce blur to near-zero for performance */
+  --xii-blur-sm: 2px;
+  --xii-blur-md: 4px;
+  --xii-blur-lg: 6px;
+  --xii-blur-xl: 8px;
+  --xii-glass-blur: blur(4px);
+
+  /* Remove shadows in Lite mode */
+  --xii-shadow-md: none;
+  --xii-shadow-lg: var(--xii-shadow-sm);
+  --xii-shadow-xl: var(--xii-shadow-md);
+  --xii-shadow-glow-cyan:   none;
+  --xii-shadow-glow-purple: none;
+
+  /* Faster animations */
+  --xii-dur-normal: 150ms;
+  --xii-dur-slow:   250ms;
+  --xii-dur-slower: 350ms;
+
+  --xii-dock-icon-size: 48px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* XII Performance Mode — full quality, high refresh           */
+/* ─────────────────────────────────────────────────────────── */
+.xii-performance {
+  /* Maximum blur for richest glassmorphism */
+  --xii-blur-md: 24px;
+  --xii-blur-lg: 36px;
+  --xii-blur-xl: 60px;
+  --xii-glass-blur: blur(24px);
+
+  /* Enhanced glows */
+  --xii-shadow-glow-cyan:   0 0 30px hsla(190,90%,70%,0.40), 0 0 80px hsla(190,90%,70%,0.15);
+  --xii-shadow-glow-purple: 0 0 30px hsla(260,80%,72%,0.35), 0 0 80px hsla(260,80%,72%,0.12);
+
+  /* Larger dock for performance machines */
+  --xii-dock-icon-size: 60px;
+
+  /* Spring animations */
+  --xii-dur-normal: 300ms;
+  --xii-dur-slow:   500ms;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Base reset for XII desktop components                       */
+/* ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--xii-font-sans);
+  font-size: var(--xii-text-base);
+  font-weight: var(--xii-weight-regular);
+  line-height: var(--xii-leading-normal);
+  color: var(--xii-text-primary);
+  background: var(--xii-bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus ring — accessible and beautiful */
+:focus-visible {
+  outline: 2px solid var(--xii-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--xii-radius-sm);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--xii-border-default);
+  border-radius: var(--xii-radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--xii-border-strong);
+}
+
+/* Selection */
+::selection {
+  background: var(--xii-cyan-glow);
+  color: var(--xii-text-primary);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Utility: Text gradient (XII brand gradient text)            */
+/* ─────────────────────────────────────────────────────────── */
+.xii-text-gradient {
+  background: var(--xii-grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.xii-text-gradient-warm {
+  background: var(--xii-grad-warm);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

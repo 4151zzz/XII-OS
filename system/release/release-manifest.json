@@ -1,0 +1,48 @@
+{
+  "project": "XII OS",
+  "codename": "Genesis",
+  "version": "1.0.0-rc1",
+  "release_type": "Release Candidate",
+  "target_architecture": "x86-64",
+  "kernel_version": "6.8.0-generic",
+  "release_date": "2026-09-28",
+  "system_requirements": {
+    "minimum": {
+      "cpu": "64-bit Dual-Core 1.6 GHz",
+      "ram_mb": 2048,
+      "storage_gb": 20,
+      "display": "1024x768"
+    },
+    "recommended": {
+      "cpu": "64-bit Quad-Core 2.4 GHz+",
+      "ram_mb": 8192,
+      "storage_gb": 64,
+      "display": "1920x1080 (FHD) or higher"
+    }
+  },
+  "default_performance_modes": ["lite", "standard", "performance"],
+  "core_components": {
+    "compositor": "Hyprland (Wayland)",
+    "status_bar": "Waybar",
+    "audio_server": "PipeWire",
+    "network_stack": "NetworkManager",
+    "package_manager": "xii (APT + Flatpak + AppImage)",
+    "security": "nftables + AppArmor + SHA-256 Integrity Engine",
+    "update_system": "Btrfs Snapshots + Rollback Engine",
+    "ai_assistant": "XII AI Assistant (Offline local intent & Least-Privilege Gate)"
+  },
+  "phases_status": {
+    "phase_1_base": "COMPLETE",
+    "phase_2_desktop": "COMPLETE",
+    "phase_3_dock_launcher": "COMPLETE",
+    "phase_4_files_settings": "COMPLETE",
+    "phase_5_connectivity": "COMPLETE",
+    "phase_6_package_store": "COMPLETE",
+    "phase_7_security_center": "COMPLETE",
+    "phase_8_update_recovery": "COMPLETE",
+    "phase_9_ai_assistant": "COMPLETE",
+    "phase_10_installer_iso": "COMPLETE",
+    "phase_11_performance": "COMPLETE",
+    "phase_12_release_candidate": "COMPLETE"
+  }
+}

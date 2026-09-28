@@ -1,0 +1,17 @@
+[Unit]
+Description=XII OS Network Daemon
+Documentation=https://xii-os.org/docs/network
+Requires=NetworkManager.service
+After=NetworkManager.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/system/network/xii-network.py daemon
+Restart=on-failure
+RestartSec=5
+RuntimeDirectory=xii-os
+StateDirectory=xii-os
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

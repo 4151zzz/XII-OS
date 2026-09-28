@@ -1,0 +1,119 @@
+/* ============================================================
+ * XII OS — Dock Stylesheet
+ * desktop/dock/xii-dock.css
+ * ============================================================ */
+
+/* ─── Dock window ─────────────────────────────────────────── */
+.dock-window {
+  background: transparent;
+}
+
+/* ─── Dock bar — glassmorphic pill ───────────────────────── */
+.dock-bar {
+  background:      rgba(10, 10, 18, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border:          1px solid rgba(255, 255, 255, 0.10);
+  border-radius:   20px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.50),
+    0 2px  8px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Dock item container ────────────────────────────────── */
+.dock-item {
+  background:    transparent;
+  padding:       4px 2px 2px;
+  border-radius: 14px;
+  transition:    background 150ms ease;
+}
+
+.dock-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ─── App icon button ────────────────────────────────────── */
+.dock-button {
+  background:    transparent;
+  border:        none;
+  border-radius: 12px;
+  padding:       6px;
+  min-width:     0;
+  min-height:    0;
+  transition:
+    background  150ms ease,
+    box-shadow  150ms ease,
+    transform   200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dock-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform:  translateY(-4px) scale(1.05);
+}
+
+.dock-button:active {
+  transform:  translateY(-2px) scale(0.97);
+  background: rgba(110, 231, 247, 0.10);
+}
+
+/* ─── Icon image ─────────────────────────────────────────── */
+.dock-icon {
+  /* Size is controlled programmatically */
+  transition: all 120ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ─── Active (running) dot ───────────────────────────────── */
+.dock-active-dot {
+  background:    #6ee7f7;
+  border-radius: 9999px;
+  min-width:     4px;
+  min-height:    4px;
+  margin-top:    1px;
+  margin-bottom: 2px;
+  /* Glow */
+  box-shadow: 0 0 6px rgba(110, 231, 247, 0.80);
+  /* Center horizontally */
+  margin-left:  auto;
+  margin-right: auto;
+}
+
+/* ─── Badge (notification count) ────────────────────────── */
+.dock-badge {
+  background:    #f472b6;
+  border-radius: 9999px;
+  color:         white;
+  font-size:     9px;
+  font-weight:   700;
+  min-width:     16px;
+  min-height:    16px;
+  padding:       1px 4px;
+  margin-top:    -2px;
+  margin-right:  -2px;
+  /* Glow */
+  box-shadow:  0 0 6px rgba(244, 114, 182, 0.80);
+}
+
+/* ─── Separator ──────────────────────────────────────────── */
+.dock-separator {
+  background:  rgba(255, 255, 255, 0.10);
+  min-width:   1px;
+  margin-top:  8px;
+  margin-bottom: 8px;
+}
+
+/* ─── Tooltip ────────────────────────────────────────────── */
+tooltip {
+  background:      rgba(16, 16, 26, 0.92);
+  backdrop-filter: blur(12px);
+  border:          1px solid rgba(255, 255, 255, 0.10);
+  border-radius:   10px;
+  box-shadow:      0 8px 24px rgba(0, 0, 0, 0.45);
+  padding:         2px;
+}
+
+tooltip label {
+  color:     #d0d0e0;
+  font-size: 12px;
+  padding:   4px 10px;
+}

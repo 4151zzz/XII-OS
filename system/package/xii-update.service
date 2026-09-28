@@ -1,0 +1,18 @@
+[Unit]
+Description=XII OS Package Update Checker
+Documentation=https://xii-os.org/docs/package
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/system/package/xii.py update --quiet
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/system/package/xii.py upgrade --quiet
+User=root
+Nice=19
+IOSchedulingClass=idle
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

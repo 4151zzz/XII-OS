@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=XII Software Update
+GenericName=System & Package Updater
+Comment=Update system packages, security patches, and manage restore points
+Exec=/usr/bin/python3 /usr/lib/xii-os/desktop/updates/xii-updater.py
+Icon=system-software-update-symbolic
+Terminal=false
+Type=Application
+Categories=System;Settings;GTK;
+StartupNotify=true
+Keywords=update;upgrade;snapshot;restore;packages;
+X-XII-App=true

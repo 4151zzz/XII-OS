@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=XII AI Assistant
+GenericName=Intelligent System Assistant
+Comment=AI-powered system diagnostic and helper for XII OS
+Exec=/usr/bin/python3 /usr/lib/xii-os/desktop/ai/xii-ai-assistant.py
+Icon=assistant-symbolic
+Terminal=false
+Type=Application
+Categories=System;Utility;GTK;
+StartupNotify=true
+Keywords=ai;assistant;help;ram;wifi;diagnostics;
+X-XII-App=true

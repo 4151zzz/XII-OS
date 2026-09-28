@@ -1,0 +1,32 @@
+# AppArmor profile for XII OS desktop applications
+# system/security/apparmor/usr.bin.xii-apps
+
+#include <tunables/global>
+
+profile xii-app-sandbox /usr/bin/xii-app-* flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+  #include <abstractions/fonts>
+  #include <abstractions/nameservice>
+  #include <abstractions/user-tmp>
+
+  # Allow read access to standard libraries and theme files
+  /usr/lib/** mr,
+  /usr/share/** r,
+  /etc/xii-os/** r,
+
+  # Wayland & Pipewire socket access
+  /run/user/[0-9]*/wayland-* rw,
+  /run/user/[0-9]*/pipewire-* rw,
+
+  # Deny direct access to shadow, sudoers, raw disks
+  deny /etc/shadow* rwklx,
+  deny /etc/sudoers* rwklx,
+  deny /dev/sd* rwklx,
+  deny /dev/nvme* rwklx,
+  deny /dev/mem rwklx,
+
+  # User documents restricted access
+  owner @{HOME}/.config/xii-os/** rw,
+  owner @{HOME}/Documents/** rw,
+  owner @{HOME}/Downloads/** rw,
+}

@@ -1,0 +1,22 @@
+[Unit]
+Description=XII OS Notification Daemon (Mako)
+Documentation=man:mako(1)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=dbus
+BusName=org.freedesktop.Notifications
+ExecStart=/usr/bin/mako --config /etc/xii-os/desktop/notifications/mako.conf
+ExecReload=/bin/kill -SIGUSR1 $MAINPID
+Restart=on-failure
+RestartSec=2
+
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_CURRENT_DESKTOP=Hyprland
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=graphical-session.target

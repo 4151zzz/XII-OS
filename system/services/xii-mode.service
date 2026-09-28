@@ -1,0 +1,26 @@
+[Unit]
+Description=XII OS Performance Mode Manager
+Documentation=https://xii-os.org/docs/xii-mode
+After=local-fs.target xii-init.service
+Wants=xii-init.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/xii-mode set standard
+ExecStartPost=/bin/bash -c 'KERNEL_MODE=$(grep -oP "(?<=xii\\.mode=)\\S+" /proc/cmdline || true); [ -n "$KERNEL_MODE" ] && /usr/bin/xii-mode set "$KERNEL_MODE" || true'
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=xii-mode
+
+# Must run as root to change CPU governor
+User=root
+
+# Partial hardening — must access /sys/
+ProtectHome=yes
+ProtectSystem=no
+PrivateTmp=yes
+NoNewPrivileges=no
+
+[Install]
+WantedBy=multi-user.target

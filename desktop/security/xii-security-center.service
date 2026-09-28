@@ -1,0 +1,13 @@
+[Unit]
+Description=XII Security Center UI Service
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/desktop/security/xii-security-center.py
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=graphical-session.target

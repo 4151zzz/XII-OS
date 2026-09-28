@@ -1,0 +1,99 @@
+{
+  "$schema": "https://xii-os.org/schemas/dock-config/v1",
+  "meta": {
+    "name": "XII OS Dock Configuration",
+    "version": "1.0.0"
+  },
+
+  "appearance": {
+    "icon_size":        52,
+    "icon_size_lite":   44,
+    "icon_size_perf":   60,
+    "padding":          10,
+    "spacing":          6,
+    "radius":           20,
+    "position":         "bottom",
+    "margin_bottom":    8,
+    "blur":             true,
+    "blur_radius":      20,
+    "magnification":    true,
+    "magnification_max": 72,
+    "magnification_range": 120,
+    "active_dot":       true,
+    "active_dot_color": "#6ee7f7",
+    "badge_color":      "#f472b6",
+    "auto_hide":        false,
+    "auto_hide_delay_ms": 400,
+    "show_labels":      false
+  },
+
+  "pinned_apps": [
+    {
+      "id": "xii-files",
+      "name": "XII Files",
+      "icon": "xii-files",
+      "exec": "xii-files",
+      "categories": ["System"]
+    },
+    {
+      "id": "xii-terminal",
+      "name": "XII Terminal",
+      "icon": "xii-terminal",
+      "exec": "xii-terminal",
+      "categories": ["System"]
+    },
+    {
+      "id": "xii-settings",
+      "name": "XII Settings",
+      "icon": "xii-settings",
+      "exec": "xii-settings",
+      "categories": ["System"]
+    },
+    {
+      "id": "firefox",
+      "name": "Firefox",
+      "icon": "firefox",
+      "exec": "firefox",
+      "categories": ["Network"]
+    },
+    {
+      "id": "xii-text",
+      "name": "XII Text",
+      "icon": "xii-text",
+      "exec": "xii-text",
+      "categories": ["Utility"]
+    },
+    {
+      "id": "xii-store",
+      "name": "XII Store",
+      "icon": "xii-store",
+      "exec": "xii-store",
+      "categories": ["System"]
+    },
+    {
+      "id": "xii-ai",
+      "name": "XII AI",
+      "icon": "xii-ai",
+      "exec": "xii-ai",
+      "categories": ["Utility"]
+    }
+  ],
+
+  "separators": [4],
+
+  "behavior": {
+    "click_action":       "focus_or_launch",
+    "middle_click":       "close_window",
+    "right_click":        "context_menu",
+    "scroll_action":      "cycle_windows",
+    "minimize_on_click":  true,
+    "group_windows":      true
+  },
+
+  "context_menu": {
+    "show_pin_toggle":   true,
+    "show_new_window":   true,
+    "show_close_all":    true,
+    "show_move_to_workspace": true
+  }
+}

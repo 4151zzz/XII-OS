@@ -1,0 +1,204 @@
+/* ============================================================
+ * XII OS — Glassmorphism Utility Classes
+ * themes/xii-glassmorphism.css
+ *
+ * Reusable glassmorphism surface classes for panels,
+ * notifications, cards, menus, and tooltips.
+ * Requires xii-global.css to be loaded first.
+ * ============================================================ */
+
+/* ─────────────────────────────────────────────────────────── */
+/* Base glass surface                                          */
+/* ─────────────────────────────────────────────────────────── */
+.xii-glass {
+  background:   var(--xii-bg-glass);
+  backdrop-filter: var(--xii-glass-blur);
+  -webkit-backdrop-filter: var(--xii-glass-blur);
+  border:  var(--xii-glass-border);
+  box-shadow: var(--xii-glass-shadow);
+  border-radius: var(--xii-radius-xl);
+  transition:
+    background   var(--xii-dur-fast) var(--xii-ease),
+    box-shadow   var(--xii-dur-fast) var(--xii-ease),
+    border-color var(--xii-dur-fast) var(--xii-ease);
+}
+
+.xii-glass:hover {
+  background: var(--xii-bg-glass-hover);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Glass variants                                              */
+/* ─────────────────────────────────────────────────────────── */
+
+/* Panel — status bar, dock */
+.xii-glass-panel {
+  background: hsla(240, 15%, 6%, 0.75);
+  backdrop-filter: blur(var(--xii-blur-lg));
+  -webkit-backdrop-filter: blur(var(--xii-blur-lg));
+  border: 1px solid var(--xii-border-subtle);
+  box-shadow: var(--xii-shadow-lg);
+}
+
+/* Card — app tiles, widgets */
+.xii-glass-card {
+  background: hsla(240, 12%, 9%, 0.70);
+  backdrop-filter: blur(var(--xii-blur-md));
+  -webkit-backdrop-filter: blur(var(--xii-blur-md));
+  border: 1px solid var(--xii-border-default);
+  box-shadow: var(--xii-shadow-md);
+  border-radius: var(--xii-radius-xl);
+  transition:
+    background  var(--xii-dur-fast) var(--xii-ease),
+    box-shadow  var(--xii-dur-fast) var(--xii-ease),
+    transform   var(--xii-dur-fast) var(--xii-spring);
+}
+
+.xii-glass-card:hover {
+  background: hsla(240, 12%, 11%, 0.80);
+  box-shadow: var(--xii-shadow-lg);
+  transform: translateY(-1px);
+}
+
+/* Floating — launcher, menus, popovers */
+.xii-glass-floating {
+  background: hsla(240, 14%, 10%, 0.85);
+  backdrop-filter: blur(var(--xii-blur-xl));
+  -webkit-backdrop-filter: blur(var(--xii-blur-xl));
+  border: 1px solid var(--xii-border-default);
+  box-shadow: var(--xii-shadow-xl);
+  border-radius: var(--xii-radius-2xl);
+}
+
+/* Tooltip */
+.xii-glass-tooltip {
+  background: hsla(240, 14%, 12%, 0.92);
+  backdrop-filter: blur(var(--xii-blur-sm));
+  -webkit-backdrop-filter: blur(var(--xii-blur-sm));
+  border: 1px solid var(--xii-border-subtle);
+  box-shadow: var(--xii-shadow-sm);
+  border-radius: var(--xii-radius-md);
+  padding: var(--xii-space-1) var(--xii-space-3);
+  font-size: var(--xii-text-xs);
+  color: var(--xii-text-secondary);
+  pointer-events: none;
+}
+
+/* Notification */
+.xii-glass-notification {
+  background: hsla(240, 13%, 10%, 0.88);
+  backdrop-filter: blur(var(--xii-blur-lg));
+  -webkit-backdrop-filter: blur(var(--xii-blur-lg));
+  border: 1px solid var(--xii-border-default);
+  border-left: 3px solid var(--xii-cyan);
+  box-shadow: var(--xii-shadow-lg), var(--xii-shadow-glow-cyan);
+  border-radius: var(--xii-radius-lg);
+}
+
+/* Accent glass — cyan glow variant */
+.xii-glass-accent {
+  background: hsla(190, 30%, 10%, 0.60);
+  backdrop-filter: blur(var(--xii-blur-md));
+  -webkit-backdrop-filter: blur(var(--xii-blur-md));
+  border: 1px solid hsla(190, 90%, 70%, 0.20);
+  box-shadow: var(--xii-shadow-md), var(--xii-shadow-glow-cyan);
+  border-radius: var(--xii-radius-lg);
+}
+
+/* Purple accent glass */
+.xii-glass-purple {
+  background: hsla(260, 25%, 10%, 0.60);
+  backdrop-filter: blur(var(--xii-blur-md));
+  -webkit-backdrop-filter: blur(var(--xii-blur-md));
+  border: 1px solid hsla(260, 80%, 72%, 0.20);
+  box-shadow: var(--xii-shadow-md), var(--xii-shadow-glow-purple);
+  border-radius: var(--xii-radius-lg);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Animated glass — entrance / exit transitions                */
+/* ─────────────────────────────────────────────────────────── */
+
+/* Fade in from below */
+@keyframes xii-glass-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    backdrop-filter: var(--xii-glass-blur);
+  }
+}
+
+/* Fade out upwards */
+@keyframes xii-glass-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+}
+
+/* Pop in — for notifications */
+@keyframes xii-pop-in {
+  0%   { opacity: 0; transform: translateX(20px) scale(0.95); }
+  60%  { opacity: 1; transform: translateX(-3px) scale(1.01); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+/* Slide up — for dock items */
+@keyframes xii-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.xii-animate-in         { animation: xii-glass-in  var(--xii-dur-normal) var(--xii-spring) both; }
+.xii-animate-out        { animation: xii-glass-out var(--xii-dur-fast)   var(--xii-ease-in) both; }
+.xii-animate-pop        { animation: xii-pop-in    var(--xii-dur-slow)   var(--xii-spring) both; }
+.xii-animate-slide-up   { animation: xii-slide-up  var(--xii-dur-normal) var(--xii-ease-out) both; }
+
+/* Staggered children animation */
+.xii-stagger > * { animation-fill-mode: both; }
+.xii-stagger > *:nth-child(1) { animation-delay: 0ms;   }
+.xii-stagger > *:nth-child(2) { animation-delay: 40ms;  }
+.xii-stagger > *:nth-child(3) { animation-delay: 80ms;  }
+.xii-stagger > *:nth-child(4) { animation-delay: 120ms; }
+.xii-stagger > *:nth-child(5) { animation-delay: 160ms; }
+
+/* ─────────────────────────────────────────────────────────── */
+/* Glow ring — focus / active state for interactive elements   */
+/* ─────────────────────────────────────────────────────────── */
+.xii-glow-ring {
+  box-shadow: 0 0 0 2px var(--xii-bg-base), 0 0 0 4px var(--xii-cyan);
+  border-radius: var(--xii-radius-md);
+}
+
+.xii-glow-ring-purple {
+  box-shadow: 0 0 0 2px var(--xii-bg-base), 0 0 0 4px var(--xii-purple);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Shimmer loading placeholder                                 */
+/* ─────────────────────────────────────────────────────────── */
+@keyframes xii-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.xii-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--xii-bg-elevated) 25%,
+    var(--xii-bg-overlay)  50%,
+    var(--xii-bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: xii-shimmer 1.6s var(--xii-ease) infinite;
+  border-radius: var(--xii-radius-md);
+}

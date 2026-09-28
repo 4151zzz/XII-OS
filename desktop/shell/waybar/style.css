@@ -1,0 +1,278 @@
+/* ============================================================
+ * XII OS — Waybar Status Bar Stylesheet
+ * desktop/shell/waybar/style.css
+ *
+ * Implements XII OS design system on Waybar:
+ *   - Glassmorphic top bar
+ *   - XII accent colors & typography
+ *   - Smooth hover & active transitions
+ * ============================================================ */
+
+@import url('/usr/share/xii-os/themes/xii-global.css');
+
+/* ─────────────────────────────────────────────────────────── */
+/* Base bar                                                    */
+/* ─────────────────────────────────────────────────────────── */
+* {
+  font-family: 'Inter', 'Noto Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+window#waybar {
+  background: rgba(10, 10, 15, 0.80);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  color: #e8e8f0;
+  transition: background 0.3s ease;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Module base                                                 */
+/* ─────────────────────────────────────────────────────────── */
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 0 4px;
+}
+
+#workspaces,
+#window,
+#clock,
+#pulseaudio,
+#network,
+#bluetooth,
+#battery,
+#tray,
+#custom-xii-logo,
+#custom-xii-mode,
+#custom-power {
+  padding: 0 10px;
+  color: #b0b0c8;
+  transition:
+    background 0.15s ease,
+    color      0.15s ease;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* XII Logo                                                    */
+/* ─────────────────────────────────────────────────────────── */
+#custom-xii-logo {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  padding: 0 14px 0 12px;
+  background: linear-gradient(135deg, #6ee7f7, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+#custom-xii-logo:hover {
+  opacity: 0.8;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Workspaces                                                  */
+/* ─────────────────────────────────────────────────────────── */
+#workspaces {
+  padding: 0 4px;
+}
+
+#workspaces button {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #606080;
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 28px;
+  padding: 0 6px;
+  margin: 4px 1px;
+  transition:
+    background 0.15s ease,
+    color      0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e8e8f0;
+}
+
+#workspaces button.active {
+  background: rgba(110, 231, 247, 0.12);
+  color: #6ee7f7;
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 #6ee7f7;
+}
+
+#workspaces button.urgent {
+  background: rgba(244, 114, 182, 0.15);
+  color: #f472b6;
+  box-shadow: inset 0 -2px 0 #f472b6;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Window title                                                */
+/* ─────────────────────────────────────────────────────────── */
+#window {
+  font-size: 12px;
+  font-weight: 400;
+  color: #707090;
+  padding-left: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Clock — center piece                                        */
+/* ─────────────────────────────────────────────────────────── */
+#clock {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #e8e8f0;
+  padding: 0 16px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Right section modules                                       */
+/* ─────────────────────────────────────────────────────────── */
+
+/* XII Performance Mode indicator */
+#custom-xii-mode {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #a78bfa;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+
+/* Audio */
+#pulseaudio {
+  color: #b0b0c8;
+}
+
+#pulseaudio:hover {
+  color: #6ee7f7;
+  background: rgba(110, 231, 247, 0.08);
+  border-radius: 8px;
+}
+
+#pulseaudio.muted {
+  color: #555570;
+}
+
+/* Network */
+#network {
+  color: #b0b0c8;
+}
+
+#network:hover {
+  color: #6ee7f7;
+  background: rgba(110, 231, 247, 0.08);
+  border-radius: 8px;
+}
+
+#network.disconnected {
+  color: #555570;
+}
+
+/* Bluetooth */
+#bluetooth {
+  color: #b0b0c8;
+}
+
+#bluetooth.connected {
+  color: #6ee7f7;
+}
+
+#bluetooth.disabled {
+  color: #555570;
+}
+
+/* Battery */
+#battery {
+  color: #b0b0c8;
+}
+
+#battery.good {
+  color: #4ade80;
+}
+
+#battery.warning:not(.charging) {
+  color: #facc15;
+  animation: xii-blink 2s step-start infinite;
+}
+
+#battery.critical:not(.charging) {
+  color: #f87171;
+  animation: xii-blink 0.8s step-start infinite;
+}
+
+#battery.charging {
+  color: #6ee7f7;
+}
+
+@keyframes xii-blink {
+  50% { opacity: 0.5; }
+}
+
+/* Tray */
+#tray {
+  padding: 0 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: rgba(244, 114, 182, 0.15);
+  border-radius: 8px;
+}
+
+/* Power button */
+#custom-power {
+  font-size: 15px;
+  color: #555570;
+  padding: 0 12px 0 8px;
+  transition: color 0.15s ease;
+}
+
+#custom-power:hover {
+  color: #f472b6;
+  background: rgba(244, 114, 182, 0.10);
+  border-radius: 8px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* Tooltip                                                     */
+/* ─────────────────────────────────────────────────────────── */
+tooltip {
+  background: rgba(16, 16, 26, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  padding: 4px 2px;
+}
+
+tooltip label {
+  color: #d0d0e0;
+  font-size: 12px;
+  padding: 4px 10px;
+}

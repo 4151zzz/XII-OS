@@ -1,0 +1,86 @@
+# =============================================================
+# XII OS — udev Rules for USB/Hardware Hotplug
+# system/hardware/udev-rules/99-xii-usb.rules
+#
+# Install: /etc/udev/rules.d/99-xii-usb.rules
+# Reload:  udevadm control --reload && udevadm trigger
+# =============================================================
+
+# ─────────────────────────────────────────────────────────────
+# USB Storage — auto-mount via udisks2 + notify
+# ─────────────────────────────────────────────────────────────
+ACTION=="add", SUBSYSTEM=="block", \
+    ENV{ID_FS_USAGE}=="filesystem", \
+    ENV{ID_BUS}=="usb", \
+    TAG+="systemd", ENV{SYSTEMD_WANTS}="xii-usb-mount@%k.service"
+
+ACTION=="remove", SUBSYSTEM=="block", \
+    ENV{ID_BUS}=="usb", \
+    RUN+="/usr/lib/xii-os/system/hardware/xii-hotplug.sh removed %k"
+
+# ─────────────────────────────────────────────────────────────
+# Power: USB suspend policy — disable for performance mode
+# ─────────────────────────────────────────────────────────────
+ACTION=="add", SUBSYSTEM=="usb", \
+    ATTR{power/control}=="auto", \
+    ATTR{power/control}="on"
+
+# ─────────────────────────────────────────────────────────────
+# Input devices — grant current user access
+# ─────────────────────────────────────────────────────────────
+SUBSYSTEM=="input", \
+    GROUP="input", MODE="0664"
+
+# ─────────────────────────────────────────────────────────────
+# Gamepad/Controllers — grant access without root
+# ─────────────────────────────────────────────────────────────
+SUBSYSTEM=="usb", \
+    ATTRS{idVendor}=="045e", \
+    GROUP="games", MODE="0664"   # Xbox controller
+
+SUBSYSTEM=="usb", \
+    ATTRS{idVendor}=="054c", \
+    GROUP="games", MODE="0664"   # PlayStation controller
+
+SUBSYSTEM=="usb", \
+    ATTRS{idVendor}=="057e", \
+    GROUP="games", MODE="0664"   # Nintendo controller
+
+# ─────────────────────────────────────────────────────────────
+# Android / ADB devices
+# ─────────────────────────────────────────────────────────────
+SUBSYSTEM=="usb", \
+    ATTR{idVendor}=="18d1", \
+    GROUP="plugdev", MODE="0664"  # Google ADB
+
+SUBSYSTEM=="usb", \
+    ATTR{idVendor}=="04e8", \
+    GROUP="plugdev", MODE="0664"  # Samsung
+
+# ─────────────────────────────────────────────────────────────
+# YubiKey / Security Keys — FIDO2
+# ─────────────────────────────────────────────────────────────
+SUBSYSTEM=="usb", \
+    ATTR{idVendor}=="1050", \
+    GROUP="plugdev", MODE="0664", TAG+="uaccess"
+
+KERNEL=="hidraw*", \
+    SUBSYSTEM=="hidraw", \
+    ATTRS{idVendor}=="1050", \
+    TAG+="uaccess"
+
+# ─────────────────────────────────────────────────────────────
+# USB-C Alternate Mode Display — notify on connect
+# ─────────────────────────────────────────────────────────────
+ACTION=="add", SUBSYSTEM=="drm", \
+    RUN+="/usr/lib/xii-os/system/hardware/xii-hotplug.sh display-added %k"
+
+ACTION=="remove", SUBSYSTEM=="drm", \
+    RUN+="/usr/lib/xii-os/system/hardware/xii-hotplug.sh display-removed %k"
+
+# ─────────────────────────────────────────────────────────────
+# Thunderbolt — authorize automatically in Safe mode
+# ─────────────────────────────────────────────────────────────
+ACTION=="add", SUBSYSTEM=="thunderbolt", \
+    ATTR{authorized}=="0", \
+    ATTR{authorized}="1"

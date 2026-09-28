@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "intents": [
+    {
+      "id": "query_system_status",
+      "description": "General system health, uptime, and load",
+      "patterns": ["status", "system status", "health", "how is system", "สถานะระบบ"],
+      "requires_root": false,
+      "impact": "low"
+    },
+    {
+      "id": "query_ram_usage",
+      "description": "Find what applications are consuming memory",
+      "patterns": ["ram", "memory", "ram usage", "กิน ram", "ใครกินแรม"],
+      "requires_root": false,
+      "impact": "low"
+    },
+    {
+      "id": "query_wifi_troubleshoot",
+      "description": "Troubleshoot network and Wi-Fi connectivity",
+      "patterns": ["wifi", "network", "internet", "เน็ตหลุด", "ทำไม wifi ใช้ไม่ได้", "เชื่อมต่อไม่ได้"],
+      "requires_root": false,
+      "impact": "low"
+    },
+    {
+      "id": "switch_performance_mode",
+      "description": "Switch between Lite, Standard, and Performance modes",
+      "patterns": ["mode", "switch mode", "lite mode", "performance mode", "ประหยัดพลังงาน", "เพิ่มความเร็ว"],
+      "requires_root": false,
+      "impact": "medium"
+    },
+    {
+      "id": "install_application",
+      "description": "Install new software via xii package manager",
+      "patterns": ["install", "get app", "download", "ติดตั้ง", "ลงโปรแกรม"],
+      "requires_root": true,
+      "impact": "high",
+      "gate_required": true
+    },
+    {
+      "id": "clean_disk_cache",
+      "description": "Clean temporary system caches and free disk space",
+      "patterns": ["clean", "clear cache", "free disk", "ล้างขยะ", "เคลียร์แคช"],
+      "requires_root": true,
+      "impact": "high",
+      "gate_required": true
+    }
+  ]
+}

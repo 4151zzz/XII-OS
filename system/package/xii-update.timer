@@ -1,0 +1,12 @@
+[Unit]
+Description=XII OS Package Update Timer (daily)
+
+[Timer]
+# Run daily at 3:00 AM (or whenever system next wakes up after that)
+OnCalendar=daily
+RandomizedDelaySec=30min
+Persistent=true
+Unit=xii-update.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://xii-os.org/schemas/package-config/v1",
+  "meta": {
+    "name": "XII Package Manager Configuration",
+    "version": "1.0.0"
+  },
+
+  "backends": {
+    "apt": {
+      "enabled":    true,
+      "priority":   10,
+      "sources":    "/etc/apt/sources.list.d/xii-os.list",
+      "cache_dir":  "/var/cache/xii-os/apt"
+    },
+    "flatpak": {
+      "enabled":     true,
+      "priority":    20,
+      "remotes": [
+        { "name": "flathub",  "url": "https://dl.flathub.org/repo/" },
+        { "name": "xii-apps", "url": "https://apps.xii-os.org/flatpak/" }
+      ],
+      "install_prefix": "user"
+    },
+    "appimage": {
+      "enabled":    true,
+      "priority":   30,
+      "install_dir": "~/.local/share/xii-os/appimages",
+      "desktop_dir": "~/.local/share/applications"
+    }
+  },
+
+  "update": {
+    "auto_check":            true,
+    "auto_check_interval_h": 24,
+    "auto_install_security": true,
+    "notify_updates":        true,
+    "quiet_hours": { "start": "23:00", "end": "07:00" }
+  },
+
+  "store": {
+    "catalog_url":   "https://store.xii-os.org/catalog/v1",
+    "cache_dir":     "/var/cache/xii-os/store",
+    "cache_ttl_min": 60,
+    "featured_file": "/etc/xii-os/store/featured-apps.json"
+  },
+
+  "security": {
+    "verify_signatures": true,
+    "allowed_sources": ["xii-os.org", "flathub.org", "ubuntu.com", "debian.org"],
+    "sandbox_flatpak":  true
+  },
+
+  "ui": {
+    "progress_style": "bar",
+    "color":          true,
+    "emoji":          true
+  }
+}

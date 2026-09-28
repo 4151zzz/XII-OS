@@ -1,0 +1,13 @@
+[Unit]
+Description=XII OS Intelligent Assistant Daemon
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/lib/xii-os/system/ai/xii-ai-core.py --daemon
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=graphical-session.target

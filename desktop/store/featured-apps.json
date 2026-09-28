@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "name":    "XII Store Featured Apps Catalog",
+    "version": "1.0.0",
+    "updated": "2026-09-28"
+  },
+  "featured": [
+    {
+      "id":          "org.mozilla.firefox",
+      "name":        "Firefox",
+      "developer":   "Mozilla",
+      "description": "Fast, privacy-respecting web browser. The default XII OS browser.",
+      "icon":        "firefox",
+      "category":    "Internet",
+      "backend":     "flatpak",
+      "rating":      4.8,
+      "downloads":   "1B+",
+      "size_mb":     280,
+      "featured":    true,
+      "xii_verified": true
+    },
+    {
+      "id":          "com.visualstudio.code",
+      "name":        "VS Code",
+      "developer":   "Microsoft",
+      "description": "Powerful, extensible code editor with built-in Git and IntelliSense.",
+      "icon":        "code",
+      "category":    "Development",
+      "backend":     "flatpak",
+      "rating":      4.9,
+      "downloads":   "500M+",
+      "size_mb":     350,
+      "featured":    true,
+      "xii_verified": true
+    },
+    {
+      "id":          "org.videolan.VLC",
+      "name":        "VLC",
+      "developer":   "VideoLAN",
+      "description": "Play anything. VLC supports virtually all video and audio formats.",
+      "icon":        "vlc",
+      "category":    "Audio & Video",
+      "backend":     "flatpak",
+      "rating":      4.7,
+      "downloads":   "3B+",
+      "size_mb":     160,
+      "featured":    true,
+      "xii_verified": true
+    },
+    {
+      "id":          "org.gimp.GIMP",
+      "name":        "GIMP",
+      "developer":   "GIMP Project",
+      "description": "Professional image editor — the GNU Image Manipulation Program.",
+      "icon":        "gimp",
+      "category":    "Graphics & Photography",
+      "backend":     "flatpak",
+      "rating":      4.5,
+      "downloads":   "200M+",
+      "size_mb":     240,
+      "featured":    true,
+      "xii_verified": true
+    },
+    {
+      "id":          "org.libreoffice.LibreOffice",
+      "name":        "LibreOffice",
+      "developer":   "The Document Foundation",
+      "description": "Free, powerful office suite. Writer, Calc, Impress, Draw, Base, Math.",
+      "icon":        "libreoffice-startcenter",
+      "category":    "Office",
+      "backend":     "flatpak",
+      "rating":      4.4,
+      "downloads":   "400M+",
+      "size_mb":     850,
+      "featured":    false,
+      "xii_verified": true
+    },
+    {
+      "id":          "com.spotify.Client",
+      "name":        "Spotify",
+      "developer":   "Spotify AB",
+      "description": "Stream millions of songs, podcasts, and audiobooks.",
+      "icon":        "spotify",
+      "category":    "Audio & Video",
+      "backend":     "flatpak",
+      "rating":      4.3,
+      "downloads":   "500M+",
+      "size_mb":     180,
+      "featured":    true,
+      "xii_verified": true
+    },
+    {
+      "id":          "com.obsproject.Studio",
+      "name":        "OBS Studio",
+      "developer":   "OBS Project",
+      "description": "Professional live streaming and screen recording software.",
+      "icon":        "obs",
+      "category":    "Audio & Video",
+      "backend":     "flatpak",
+      "rating":      4.8,
+      "downloads":   "100M+",
+      "size_mb":     420,
+      "featured":    false,
+      "xii_verified": true
+    },
+    {
+      "id":          "io.github.celluloid_player.Celluloid",
+      "name":        "Celluloid",
+      "developer":   "Gnome",
+      "description": "Simple, elegant GTK4 media player based on mpv.",
+      "icon":        "io.github.celluloid_player.Celluloid",
+      "category":    "Audio & Video",
+      "backend":     "flatpak",
+      "rating":      4.6,
+      "downloads":   "5M+",
+      "size_mb":     95,
+      "featured":    false,
+      "xii_verified": true
+    }
+  ],
+  "categories": [
+    "Featured",
+    "Internet",
+    "Development",
+    "Audio & Video",
+    "Graphics & Photography",
+    "Office",
+    "Games",
+    "Utility",
+    "System",
+    "Education"
+  ]
+}

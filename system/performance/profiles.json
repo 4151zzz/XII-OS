@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "profiles": {
+    "lite": {
+      "name": "XII Lite",
+      "target_idle_ram_mb": 350,
+      "max_boot_seconds": 6.5,
+      "cpu_governor": "powersave",
+      "blur_passes": 0,
+      "blur_size": 0,
+      "animations_ms": 150,
+      "zram_ratio": 0.5,
+      "swappiness": 10,
+      "disabled_services": ["bluetooth", "cups", "avahi-daemon"]
+    },
+    "standard": {
+      "name": "XII Standard",
+      "target_idle_ram_mb": 650,
+      "max_boot_seconds": 7.5,
+      "cpu_governor": "schedutil",
+      "blur_passes": 3,
+      "blur_size": 16,
+      "animations_ms": 250,
+      "zram_ratio": 0.3,
+      "swappiness": 30,
+      "disabled_services": []
+    },
+    "performance": {
+      "name": "XII Performance",
+      "target_idle_ram_mb": 950,
+      "max_boot_seconds": 8.0,
+      "cpu_governor": "performance",
+      "blur_passes": 4,
+      "blur_size": 24,
+      "animations_ms": 300,
+      "zram_ratio": 0.2,
+      "swappiness": 60,
+      "disabled_services": []
+    }
+  }
+}

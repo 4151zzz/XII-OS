@@ -1,0 +1,80 @@
+# XII OS — GRUB Boot Theme
+# Visual design specification for GRUB 2 graphical terminal
+# Compatible with: GRUB 2.06+  Resolution: 1920x1080 (scales to auto)
+
+# ────────────────────────────────────────────────
+# Global Desktop Background
+# ────────────────────────────────────────────────
+desktop-image: "xii-boot-bg.png"
+desktop-color: "#0a0a0f"
+
+# ────────────────────────────────────────────────
+# Boot Menu Box
+# ────────────────────────────────────────────────
+# + item_color          : color of normal menu items
+# + selected_item_color : color of highlighted item
+# + item_height         : height in pixels per item
+# + item_padding        : internal padding
+# + item_spacing        : gap between items
+
++ boot_menu {
+    left   = 20%
+    top    = 28%
+    width  = 60%
+    height = 45%
+
+    item_color              = "#c0c0d0"
+    selected_item_color     = "#6ee7f7"
+    item_height             = 40
+    item_padding            = 12
+    item_spacing            = 4
+
+    scrollbar               = false
+    icon_width              = 24
+    icon_height             = 24
+}
+
+# ────────────────────────────────────────────────
+# Title / OS Name Label
+# ────────────────────────────────────────────────
++ label {
+    top    = 12%
+    left   = 50%
+    align  = center
+    id     = __title__
+    text   = "XII OS"
+    color  = "#a78bfa"
+    font   = "Inter Regular 36"
+}
+
++ label {
+    top    = 19%
+    left   = 50%
+    align  = center
+    text   = "Beautiful · Lightweight · Intelligent"
+    color  = "#4a4a6a"
+    font   = "Inter Light 14"
+}
+
+# ────────────────────────────────────────────────
+# Countdown Timer
+# ────────────────────────────────────────────────
++ label {
+    top    = 77%
+    left   = 50%
+    align  = center
+    id     = __timeout__
+    text   = "Booting in %d seconds"
+    color  = "#4a4a5a"
+    font   = "Inter Light 13"
+}
+
+# ────────────────────────────────────────────────
+# Color Token Reference
+# ────────────────────────────────────────────────
+# Background      : #0a0a0f  (Near-black, deep space)
+# Primary Text    : #c0c0d0  (Soft platinum)
+# Accent Cyan     : #6ee7f7  (XII Highlight Blue)
+# Accent Purple   : #a78bfa  (XII Identity Purple)
+# Accent Pink     : #f472b6  (XII Accent Rose)
+# Muted           : #4a4a6a  (Dimmed annotation text)

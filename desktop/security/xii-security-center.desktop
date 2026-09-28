@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=XII Security Center
+GenericName=Security & Integrity Manager
+Comment=Monitor system protection, firewall, permissions, and integrity
+Exec=/usr/bin/python3 /usr/lib/xii-os/desktop/security/xii-security-center.py
+Icon=security-high-symbolic
+Terminal=false
+Type=Application
+Categories=System;Security;Settings;GTK;
+StartupNotify=true
+Keywords=security;firewall;apparmor;antivirus;integrity;permissions;
+X-XII-App=true

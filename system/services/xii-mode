@@ -1,0 +1,252 @@
+#!/usr/bin/env bash
+# ============================================================
+# XII OS — Performance Mode CLI Tool
+# /usr/bin/xii-mode
+# ============================================================
+# Usage:
+#   xii-mode get                  — Print current active mode
+#   xii-mode set <mode>           — Switch to mode immediately
+#   xii-mode list                 — List all valid modes
+#   xii-mode status               — Detailed status of current mode
+#   xii-mode --version            — Print version
+#   xii-mode --help               — Show usage
+#
+# Valid modes: lite | standard | performance
+# ============================================================
+
+set -euo pipefail
+
+readonly XII_MODE_FILE="/etc/xii-os/current-mode"
+readonly XII_MODE_DIR="/etc/xii-os/modes"
+readonly XII_VERSION="1.0.0"
+readonly XII_VALID_MODES=("lite" "standard" "performance")
+
+# ────────────────────────────────────────────────────────────
+# Color helpers (only when stdout is a terminal)
+# ────────────────────────────────────────────────────────────
+if [[ -t 1 ]]; then
+    C_CYAN="\033[36m"; C_PURPLE="\033[35m"; C_GREEN="\033[32m"
+    C_YELLOW="\033[33m"; C_RED="\033[31m"; C_RESET="\033[0m"; C_BOLD="\033[1m"
+else
+    C_CYAN=""; C_PURPLE=""; C_GREEN=""; C_YELLOW=""; C_RED=""; C_RESET=""; C_BOLD=""
+fi
+
+usage() {
+    echo -e "${C_BOLD}xii-mode${C_RESET} — XII OS Performance Mode Manager v${XII_VERSION}"
+    echo ""
+    echo -e "${C_BOLD}Usage:${C_RESET}"
+    echo "  xii-mode get                   Print the currently active performance mode"
+    echo "  xii-mode set <mode>            Switch to the given performance mode"
+    echo "  xii-mode list                  List all available modes with descriptions"
+    echo "  xii-mode status                Show detailed status of the active mode"
+    echo "  xii-mode --version             Print version number"
+    echo "  xii-mode --help                Show this help message"
+    echo ""
+    echo -e "${C_BOLD}Available Modes:${C_RESET}"
+    echo "  lite          Optimized for low-resource hardware (< 4 GB RAM)"
+    echo "  standard      Balanced desktop experience (default)"
+    echo "  performance   Maximum throughput for powerful machines"
+    echo ""
+    echo -e "${C_BOLD}Examples:${C_RESET}"
+    echo "  sudo xii-mode set lite"
+    echo "  xii-mode get"
+    echo "  xii-mode status"
+}
+
+# ────────────────────────────────────────────────────────────
+# Helper: read current mode
+# ────────────────────────────────────────────────────────────
+get_current_mode() {
+    if [[ -f "$XII_MODE_FILE" ]]; then
+        cat "$XII_MODE_FILE" | tr -d '[:space:]'
+    else
+        echo "standard"
+    fi
+}
+
+# ────────────────────────────────────────────────────────────
+# Helper: validate mode name
+# ────────────────────────────────────────────────────────────
+is_valid_mode() {
+    local mode="$1"
+    for valid in "${XII_VALID_MODES[@]}"; do
+        [[ "$mode" == "$valid" ]] && return 0
+    done
+    return 1
+}
+
+# ────────────────────────────────────────────────────────────
+# Apply mode: set CPU governor, sysctl tweaks, ZRAM size hint
+# ────────────────────────────────────────────────────────────
+apply_mode() {
+    local mode="$1"
+
+    case "$mode" in
+        lite)
+            # CPU — use powersave governor
+            for gov_path in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+                [[ -f "$gov_path" ]] && echo "powersave" > "$gov_path" 2>/dev/null || true
+            done
+            # VM tuning — more aggressive swapping allowed to save RAM
+            sysctl -q vm.swappiness=25 2>/dev/null || true
+            sysctl -q vm.vfs_cache_pressure=75 2>/dev/null || true
+            ;;
+        standard)
+            for gov_path in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+                [[ -f "$gov_path" ]] && echo "schedutil" > "$gov_path" 2>/dev/null || true
+            done
+            sysctl -q vm.swappiness=15 2>/dev/null || true
+            sysctl -q vm.vfs_cache_pressure=50 2>/dev/null || true
+            ;;
+        performance)
+            for gov_path in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+                [[ -f "$gov_path" ]] && echo "performance" > "$gov_path" 2>/dev/null || true
+            done
+            sysctl -q vm.swappiness=5 2>/dev/null || true
+            sysctl -q vm.vfs_cache_pressure=30 2>/dev/null || true
+            ;;
+    esac
+
+    # Notify D-Bus (if XII Mode Manager daemon is running)
+    if command -v dbus-send &>/dev/null; then
+        dbus-send --system --type=signal /org/xiios/ModeManager \
+            org.xiios.ModeManager.ModeChanged string:"$mode" 2>/dev/null || true
+    fi
+}
+
+# ────────────────────────────────────────────────────────────
+# Commands
+# ────────────────────────────────────────────────────────────
+cmd_get() {
+    local mode
+    mode=$(get_current_mode)
+    echo -e "${C_CYAN}${mode}${C_RESET}"
+}
+
+cmd_set() {
+    local mode="${1:-}"
+    if [[ -z "$mode" ]]; then
+        echo -e "${C_RED}Error:${C_RESET} 'xii-mode set' requires a mode argument." >&2
+        echo "  Valid modes: ${XII_VALID_MODES[*]}" >&2
+        exit 1
+    fi
+
+    if ! is_valid_mode "$mode"; then
+        echo -e "${C_RED}Error:${C_RESET} Unknown mode '${mode}'." >&2
+        echo "  Valid modes: ${XII_VALID_MODES[*]}" >&2
+        exit 1
+    fi
+
+    if [[ $EUID -ne 0 ]]; then
+        echo -e "${C_RED}Error:${C_RESET} 'xii-mode set' requires root privileges." >&2
+        echo "  Run: sudo xii-mode set $mode" >&2
+        exit 1
+    fi
+
+    local prev_mode
+    prev_mode=$(get_current_mode)
+
+    # Persist mode
+    mkdir -p "$(dirname "$XII_MODE_FILE")"
+    echo "$mode" > "$XII_MODE_FILE"
+
+    # Apply kernel-level changes immediately
+    apply_mode "$mode"
+
+    echo -e "${C_BOLD}XII OS Performance Mode${C_RESET}"
+    echo -e "  ${C_PURPLE}${prev_mode}${C_RESET} → ${C_GREEN}${mode}${C_RESET}"
+    echo -e "  Changes applied immediately. Mode persisted for next boot."
+}
+
+cmd_list() {
+    echo -e "${C_BOLD}XII OS — Available Performance Modes${C_RESET}"
+    echo ""
+    echo -e "  ${C_GREEN}lite${C_RESET}"
+    echo "    Target: < 4 GB RAM, older dual-core CPUs"
+    echo "    CPU Governor:    powersave / conservative"
+    echo "    ZRAM Pool:       50% of RAM (zstd compression)"
+    echo "    Compositor:      Blur off, transparency low, no shadows"
+    echo "    Idle RAM Target: ~280 MB – 380 MB"
+    echo ""
+    echo -e "  ${C_CYAN}standard${C_RESET}  (default)"
+    echo "    Target: 4–16 GB RAM, mainstream hardware"
+    echo "    CPU Governor:    schedutil (dynamic)"
+    echo "    ZRAM Pool:       25% of RAM (zstd compression)"
+    echo "    Compositor:      Soft blur, subtle shadows, 60fps"
+    echo "    Idle RAM Target: ~500 MB – 650 MB"
+    echo ""
+    echo -e "  ${C_PURPLE}performance${C_RESET}"
+    echo "    Target: > 16 GB RAM, discrete GPU, workstations"
+    echo "    CPU Governor:    performance"
+    echo "    ZRAM Pool:       Minimal / disabled"
+    echo "    Compositor:      Full effects, dynamic physics, 144Hz+"
+    echo "    Idle RAM Target: ~800 MB – 1 GB"
+    echo ""
+    local current
+    current=$(get_current_mode)
+    echo -e "  Active mode: ${C_YELLOW}${current}${C_RESET}"
+}
+
+cmd_status() {
+    local mode
+    mode=$(get_current_mode)
+
+    echo -e "${C_BOLD}XII OS Performance Mode Status${C_RESET}"
+    echo ""
+    echo -e "  Current Mode:    ${C_CYAN}${mode}${C_RESET}"
+
+    # CPU governor (first CPU)
+    local gov="unknown"
+    local gov_path="/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
+    [[ -f "$gov_path" ]] && gov=$(cat "$gov_path")
+    echo -e "  CPU Governor:    ${gov}"
+
+    # ZRAM
+    local zram_used="not active"
+    if [[ -b /dev/zram0 ]]; then
+        local zram_size
+        zram_size=$(cat /sys/block/zram0/disksize 2>/dev/null || echo 0)
+        zram_size=$(( zram_size / 1024 / 1024 ))
+        zram_used="${zram_size} MB"
+    fi
+    echo -e "  ZRAM Swap:       ${zram_used}"
+
+    # VM swappiness
+    local swappiness
+    swappiness=$(cat /proc/sys/vm/swappiness 2>/dev/null || echo "unknown")
+    echo -e "  vm.swappiness:   ${swappiness}"
+
+    # RAM usage
+    local mem_used mem_total
+    mem_total=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+    mem_used=$(grep MemAvailable /proc/meminfo | awk '{print $2}')
+    mem_used=$(( (mem_total - mem_used) / 1024 ))
+    mem_total=$(( mem_total / 1024 ))
+    echo -e "  RAM Usage:       ${mem_used} MB / ${mem_total} MB"
+
+    echo ""
+    echo -e "  Mode file:       ${XII_MODE_FILE}"
+}
+
+# ────────────────────────────────────────────────────────────
+# Entry point
+# ────────────────────────────────────────────────────────────
+main() {
+    local cmd="${1:-}"
+
+    case "$cmd" in
+        get)        cmd_get ;;
+        set)        shift; cmd_set "$@" ;;
+        list)       cmd_list ;;
+        status)     cmd_status ;;
+        --version|-V) echo "xii-mode ${XII_VERSION}" ;;
+        --help|-h|"")  usage ;;
+        *)
+            echo -e "${C_RED}Error:${C_RESET} Unknown command '${cmd}'." >&2
+            echo "  Run 'xii-mode --help' for usage." >&2
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"

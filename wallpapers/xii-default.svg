@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" width="3840" height="2160">
+  <defs>
+    <!-- Deep space gradient background -->
+    <radialGradient id="bg" cx="40%" cy="35%" r="75%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="hsl(245,20%,8%)"/>
+      <stop offset="45%"  stop-color="hsl(240,18%,6%)"/>
+      <stop offset="100%" stop-color="hsl(235,22%,3%)"/>
+    </radialGradient>
+
+    <!-- Cyan nebula glow -->
+    <radialGradient id="glow-cyan" cx="30%" cy="28%" r="45%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="hsl(190,90%,70%)" stop-opacity="0.08"/>
+      <stop offset="60%"  stop-color="hsl(200,80%,60%)" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="hsl(210,70%,50%)" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Purple nebula glow -->
+    <radialGradient id="glow-purple" cx="72%" cy="65%" r="50%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="hsl(260,80%,72%)" stop-opacity="0.07"/>
+      <stop offset="60%"  stop-color="hsl(270,70%,60%)" stop-opacity="0.025"/>
+      <stop offset="100%" stop-color="hsl(280,60%,50%)" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Rose accent glow -->
+    <radialGradient id="glow-rose" cx="80%" cy="20%" r="30%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="hsl(330,75%,68%)" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="hsl(340,65%,58%)" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Horizontal light streak -->
+    <linearGradient id="streak-h" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#6ee7f7" stop-opacity="0"/>
+      <stop offset="30%"  stop-color="#6ee7f7" stop-opacity="0.04"/>
+      <stop offset="50%"  stop-color="#a78bfa" stop-opacity="0.06"/>
+      <stop offset="70%"  stop-color="#6ee7f7" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#6ee7f7" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Logo gradient -->
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#6ee7f7"/>
+      <stop offset="50%"  stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+
+    <!-- Glow filter for logo -->
+    <filter id="logo-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle glow filter for grid -->
+    <filter id="grid-glow">
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Star blur -->
+    <filter id="star-glow">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+
+  <!-- 1. Background -->
+  <rect width="3840" height="2160" fill="url(#bg)"/>
+
+  <!-- 2. Nebula glows -->
+  <rect width="3840" height="2160" fill="url(#glow-cyan)"/>
+  <rect width="3840" height="2160" fill="url(#glow-purple)"/>
+  <rect width="3840" height="2160" fill="url(#glow-rose)"/>
+
+  <!-- 3. Horizontal light band (atmospheric haze) -->
+  <rect x="0" y="900" width="3840" height="360" fill="url(#streak-h)" opacity="0.5"/>
+
+  <!-- 4. Subtle perspective grid (very faint) -->
+  <g opacity="0.025" stroke="#6ee7f7" stroke-width="1" filter="url(#grid-glow)">
+    <!-- Vertical lines -->
+    <line x1="480"  y1="0" x2="480"  y2="2160"/>
+    <line x1="960"  y1="0" x2="960"  y2="2160"/>
+    <line x1="1440" y1="0" x2="1440" y2="2160"/>
+    <line x1="1920" y1="0" x2="1920" y2="2160"/>
+    <line x1="2400" y1="0" x2="2400" y2="2160"/>
+    <line x1="2880" y1="0" x2="2880" y2="2160"/>
+    <line x1="3360" y1="0" x2="3360" y2="2160"/>
+    <!-- Horizontal lines -->
+    <line x1="0" y1="432"  x2="3840" y2="432"/>
+    <line x1="0" y1="864"  x2="3840" y2="864"/>
+    <line x1="0" y1="1080" x2="3840" y2="1080"/>
+    <line x1="0" y1="1296" x2="3840" y2="1296"/>
+    <line x1="0" y1="1728" x2="3840" y2="1728"/>
+  </g>
+
+  <!-- 5. Starfield (procedural dots) -->
+  <g opacity="0.6">
+    <!-- Bright stars -->
+    <circle cx="320"  cy="180"  r="1.5" fill="white" opacity="0.9"/>
+    <circle cx="580"  cy="420"  r="1.2" fill="white" opacity="0.7"/>
+    <circle cx="980"  cy="140"  r="1.8" fill="#d0f0ff" opacity="0.85"/>
+    <circle cx="1240" cy="380"  r="1.0" fill="white" opacity="0.65"/>
+    <circle cx="1680" cy="220"  r="1.5" fill="white" opacity="0.80"/>
+    <circle cx="2100" cy="90"   r="2.0" fill="#e0e8ff" opacity="0.90"/>
+    <circle cx="2480" cy="310"  r="1.2" fill="white" opacity="0.70"/>
+    <circle cx="2900" cy="160"  r="1.6" fill="white" opacity="0.80"/>
+    <circle cx="3240" cy="440"  r="1.0" fill="white" opacity="0.60"/>
+    <circle cx="3600" cy="200"  r="1.8" fill="#d8f0ff" opacity="0.85"/>
+    <!-- Mid stars -->
+    <circle cx="160"  cy="600"  r="1.0" fill="white" opacity="0.55"/>
+    <circle cx="440"  cy="750"  r="1.3" fill="white" opacity="0.65"/>
+    <circle cx="820"  cy="680"  r="0.8" fill="white" opacity="0.50"/>
+    <circle cx="1360" cy="580"  r="1.4" fill="#c8e8ff" opacity="0.70"/>
+    <circle cx="1820" cy="720"  r="1.0" fill="white" opacity="0.60"/>
+    <circle cx="2260" cy="640"  r="1.2" fill="white" opacity="0.65"/>
+    <circle cx="2660" cy="820"  r="0.9" fill="white" opacity="0.55"/>
+    <circle cx="3040" cy="700"  r="1.5" fill="white" opacity="0.75"/>
+    <circle cx="3480" cy="560"  r="1.1" fill="white" opacity="0.60"/>
+    <!-- Faint distant stars -->
+    <circle cx="700"  cy="1600" r="0.7" fill="white" opacity="0.35"/>
+    <circle cx="1500" cy="1750" r="0.8" fill="white" opacity="0.40"/>
+    <circle cx="2200" cy="1650" r="0.6" fill="white" opacity="0.30"/>
+    <circle cx="3000" cy="1800" r="0.9" fill="white" opacity="0.38"/>
+    <!-- Cyan-tinted stars (near XII accent zones) -->
+    <circle cx="420"  cy="280"  r="1.8" fill="#6ee7f7" opacity="0.50" filter="url(#star-glow)"/>
+    <circle cx="960"  cy="360"  r="1.4" fill="#a78bfa" opacity="0.45" filter="url(#star-glow)"/>
+    <circle cx="2760" cy="1400" r="1.6" fill="#a78bfa" opacity="0.40" filter="url(#star-glow)"/>
+    <circle cx="3200" cy="900"  r="1.2" fill="#f472b6" opacity="0.35" filter="url(#star-glow)"/>
+  </g>
+
+  <!-- 6. XII Logo Hexagon — centered, large and confident -->
+  <g transform="translate(1920, 1080)" filter="url(#logo-glow)">
+    <!-- Outer hexagon ring -->
+    <polygon
+      points="0,-120 104,-60 104,60 0,120 -104,60 -104,-60"
+      fill="none"
+      stroke="url(#logo-grad)"
+      stroke-width="2"
+      opacity="0.85"/>
+    <!-- Middle ring -->
+    <polygon
+      points="0,-78 67,-39 67,39 0,78 -67,39 -67,-39"
+      fill="none"
+      stroke="url(#logo-grad)"
+      stroke-width="1.5"
+      opacity="0.45"/>
+    <!-- Inner ring -->
+    <polygon
+      points="0,-48 42,-24 42,24 0,48 -42,24 -42,-24"
+      fill="none"
+      stroke="url(#logo-grad)"
+      stroke-width="1"
+      opacity="0.25"/>
+
+    <!-- Connector spokes (outer to mid) -->
+    <g stroke="url(#logo-grad)" stroke-width="1" opacity="0.5">
+      <line x1="0"   y1="-78"  x2="0"   y2="-120"/>
+      <line x1="67"  y1="-39"  x2="104" y2="-60"/>
+      <line x1="67"  y1="39"   x2="104" y2="60"/>
+      <line x1="0"   y1="78"   x2="0"   y2="120"/>
+      <line x1="-67" y1="39"   x2="-104" y2="60"/>
+      <line x1="-67" y1="-39"  x2="-104" y2="-60"/>
+    </g>
+
+    <!-- Center orb -->
+    <circle cx="0" cy="0" r="8"
+      fill="url(#logo-grad)" opacity="0.95"/>
+    <!-- Center glow -->
+    <circle cx="0" cy="0" r="20"
+      fill="#6ee7f7" opacity="0.06"/>
+  </g>
+
+  <!-- 7. XII OS wordmark -->
+  <text
+    x="1920" y="1258"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="52"
+    font-weight="200"
+    letter-spacing="32"
+    text-anchor="middle"
+    fill="url(#logo-grad)"
+    opacity="0.90"
+    filter="url(#logo-glow)">XII OS</text>
+
+  <!-- 8. Tagline -->
+  <text
+    x="1920" y="1296"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="14"
+    font-weight="300"
+    letter-spacing="8"
+    text-anchor="middle"
+    fill="#6ee7f7"
+    opacity="0.28">BEAUTIFUL · LIGHTWEIGHT · INTELLIGENT</text>
+
+  <!-- 9. Decorative arc elements (subtle tech feel) -->
+  <g opacity="0.04" stroke="#6ee7f7" stroke-width="1" fill="none">
+    <!-- Left arc -->
+    <path d="M 800,1080 A 600,600 0 0 1 1200,520"/>
+    <!-- Right arc -->
+    <path d="M 3040,1080 A 600,600 0 0 0 2640,520"/>
+  </g>
+</svg>
